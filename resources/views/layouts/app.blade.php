@@ -57,6 +57,18 @@
                             </div>
                         </li>
                         @endcan
+                            @can("User list")
+                                <li class="nav-item dropdown">
+                                    <a id="roleDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ __("Users") }}
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="roleDropdown">
+                                        <a class="dropdown-item" href="{{route('users.index')}}">{{__("View users")}}</a>
+                                        <a class="dropdown-item" href="{{route('users.create')}}">{{__("Create user")}}</a>
+                                    </div>
+                                </li>
+                            @endcan
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -20,6 +20,11 @@
                     <div class="row">
                         <div class="col"><a href="{{route("roles.show",$role)}}">View Role</a></div>
                         <div class="col"><a href="{{route("roles.edit",$role)}}">Edit Role</a></div>
+                        <form id="deleteForm" action="{{route("roles.destroy",$role)}}" method="post">
+                            @csrf
+                            @method("DELETE")
+                            <button type="submit" class="btn btn-danger">Delete Role</button>
+                        </form>
                     </div>
                 </td>
             </tr>
