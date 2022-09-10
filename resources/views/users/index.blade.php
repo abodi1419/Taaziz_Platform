@@ -3,40 +3,46 @@
 @section('content')
 <div class="container">
     <h3>{{__('Users')}}</h3>
-    <table class="table">
-        <thead>
-        <tr>
-            <td>{{__('#')}}</td>
-            <td>{{__('Name')}}</td>
-            <td>{{__('Email')}}</td>
-            <td>{{__('Joined at')}}</td>
-            <td>{{__('Actions')}}</td>
-        </tr>
+    @foreach($users as $userRoles)
 
-        </thead>
-        <tbody>
-        @foreach($users as $index=>$user)
-
+        <h4>{{$userRoles[0]->roles[0]->name}}</h4>
+        <table class="table">
+            <thead>
             <tr>
-                <td>{{$index+1}}</td>
-                <td>{{$user->name}}</td>
-                <td>{{$user->email}}</td>
-                <td>{{$user->created_at}}</td>
-                <td>
-                    <div class="row">
-                        <div class="col"><a href="{{route("users.show",$user)}}">View User</a></div>
-                        <div class="col"><a href="{{route("users.edit",$user)}}">Edit User</a></div>
-                        <form id="deleteForm" action="{{route("users.destroy",$user)}}" method="post">
-                            @csrf
-                            @method("DELETE")
-                            <button type="submit" class="btn btn-danger">Delete User</button>
-                        </form>
-                    </div>
-                </td>
+                <td>{{__('#')}}</td>
+                <td>{{__('Name')}}</td>
+                <td>{{__('Role')}}</td>
+                <td>{{__('Email')}}</td>
+                <td>{{__('Joined at')}}</td>
+                <td>{{__('Actions')}}</td>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+
+            </thead>
+            <tbody>
+            @foreach($userRoles as $index=>$user)
+
+                <tr>
+                    <td>{{$index+1}}</td>
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->roles[0]->name}}</td>
+                    <td>{{$user->email}}</td>
+                    <td>{{$user->created_at}}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col"><a href="{{route("users.show",$user)}}">View User</a></div>
+                            <div class="col"><a href="{{route("users.edit",$user)}}">Edit User</a></div>
+                            <form id="deleteForm" action="{{route("users.destroy",$user)}}" method="post">
+                                @csrf
+                                @method("DELETE")
+                                <button type="submit" class="btn btn-danger">Delete User</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    @endforeach
     <a class="btn btn-primary" href="{{route("users.create")}}">{{__("Create User")}}</a>
 </div>
 

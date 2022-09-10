@@ -35,6 +35,11 @@ class PermissionTableSeeder extends Seeder
             'Article create',
             'Article edit',
             'Article delete',
+            //students
+            'Student list',
+            'Student create',
+            'Student edit',
+            'Student delete',
 
         ];
 

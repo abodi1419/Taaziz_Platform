@@ -4,7 +4,7 @@
 <div class="container">
     <h3>{{__('Create User')}}</h3>
     <hr>
-    <form action="{{route('users.store')}}" method="post">
+    <form action="{{route('users.store')}}" id="myForm" method="post">
         @csrf
         @method('POST')
         <div class="row mb-3">
@@ -69,19 +69,22 @@
                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
             </div>
         </div>
-
+        @can('Role edit')
         <div class="row mb-3">
             <label for="role" class="col-md-4 col-form-label text-md-end">{{ __('Role') }}</label>
 
             <div class="col-md-6">
-                <select name="role" id="role" class="form-control">
+                <select name="role" id="role" onchange="onRoleChanges(this)" class="form-control">
                     @foreach($roles as $role)
                         <option value="{{$role->id}}">{{$role->name}}</option>
                     @endforeach
                 </select>
             </div>
         </div>
+        @endcan
+        <div id="role-part">
 
+        </div>
         <div class="row mb-0">
             <div class="col-md-6 offset-md-4">
                 <button type="submit" class="btn btn-primary">
@@ -90,8 +93,30 @@
             </div>
         </div>
 
-    </form>
 
+    </form>
+    <script>
+        var rolePart = document.getElementById('role-part');
+        let rolesSelect = document.getElementById('role');
+        if(rolesSelect.options[rolesSelect.selectedIndex].text==='student'){
+            rolePart.innerHTML=`@include("users._student")`;
+            changeFormAction('{{route('student.store')}}')
+        }
+        function onRoleChanges(e) {
+            if (e.options[e.selectedIndex].text==='student'){
+                rolePart.innerHTML =`@include("users._student")`;
+                changeFormAction('{{route('student.store')}}')
+            }else{
+                rolePart.innerHTML = ""
+                changeFormAction('{{route('users.store')}}')
+
+            }
+
+        }
+        function changeFormAction(route) {
+            document.getElementById('myForm').action = route
+        }
+    </script>
 </div>
 
 

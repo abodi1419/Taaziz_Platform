@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
@@ -22,3 +22,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('roles', App\Http\Controllers\RoleController::class);
 Route::resource('users', App\Http\Controllers\UserManagementController::class);
+Route::resource('student',\App\Http\Controllers\StudentController::class)->except('show');
+Route::resource('profile',\App\Http\Controllers\ProfileController::class)->except('show');
+Route::resource('skills',\App\Http\Controllers\SkillController::class)->except('show');
+Route::resource('experiences',\App\Http\Controllers\ExperienceController::class)->except('show');
+Route::resource('projects',\App\Http\Controllers\ProjectController::class)->except('show');
