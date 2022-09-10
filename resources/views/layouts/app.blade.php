@@ -44,34 +44,44 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-
+                    @auth
                     <ul class="navbar-nav me-auto">
                         @can("Role list")
-                        <li class="nav-item dropdown">
-                            <a id="roleDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ __("Roles") }}
-                            </a>
+                            <li class="nav-item dropdown">
+                                <a id="roleDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ __("Roles") }}
+                                </a>
 
-                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="roleDropdown">
-                                <a class="dropdown-item" href="{{route('roles.index')}}">{{__("View Roles")}}</a>
-                                <a class="dropdown-item" href="{{route('roles.create')}}">{{__("Create Role")}}</a>
-                            </div>
-                        </li>
+                                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="roleDropdown">
+                                    <a class="dropdown-item" href="{{route('roles.index')}}">{{__("View Roles")}}</a>
+                                    <a class="dropdown-item" href="{{route('roles.create')}}">{{__("Create Role")}}</a>
+                                </div>
+                            </li>
                         @endcan
-                            @can("User list")
-                                <li class="nav-item dropdown">
-                                    <a id="roleDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ __("Users") }}
-                                    </a>
+                        @can("User list")
+                            <li class="nav-item dropdown">
+                                <a id="roleDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ __("Users") }}
+                                </a>
 
-                                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="roleDropdown">
-                                        <a class="dropdown-item" href="{{route('users.index')}}">{{__("View users")}}</a>
-                                        <a class="dropdown-item" href="{{route('users.create')}}">{{__("Create user")}}</a>
-                                    </div>
-                                </li>
-                            @endcan
+                                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="roleDropdown">
+                                    <a class="dropdown-item" href="{{route('users.index')}}">{{__("View users")}}</a>
+                                    <a class="dropdown-item" href="{{route('users.create')}}">{{__("Create user")}}</a>
+                                </div>
+                            </li>
+                        @endcan
+                        @if(auth()->user()->hasRole('student'))
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="{{route('profile.index')}}" role="button">
+                                    {{ __("Profile") }}
+                                </a>
+
+
+                            </li>
+                        @endif
+
                     </ul>
-
+                    @endauth
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->

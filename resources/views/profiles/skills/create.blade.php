@@ -32,7 +32,9 @@
                 <button type="submit" class="btn btn-primary">
                     {{ __('Add') }}
                 </button>
-                <a href="{{route('experiences.create')}}">{{__('Next')}}</a>
+                @if($next)
+                    <a href="{{route('experiences.create')}}">{{__('Next')}}</a>
+                @endif
 
             </div>
         </div>

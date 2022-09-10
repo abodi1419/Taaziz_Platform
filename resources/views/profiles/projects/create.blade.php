@@ -83,7 +83,10 @@
                 <button type="submit" class="btn btn-primary">
                     {{ __('Add') }}
                 </button>
-                <a href="">{{__('Next')}}</a>
+                @if($next)
+                    <a href="">{{__('Next')}}</a>
+                @endif
+
 
             </div>
         </div>

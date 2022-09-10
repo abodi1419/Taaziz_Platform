@@ -24,7 +24,13 @@ class SkillController extends Controller
      */
     public function create()
     {
-        return view('profiles.skills.create');
+        $prev = str_replace(url('/'), '', url()->previous());
+        $next = true;
+        if($prev=='/profile')
+            $next = false;
+
+
+        return view('profiles.skills.create',compact('next'));
     }
 
     /**
@@ -85,6 +91,7 @@ class SkillController extends Controller
      */
     public function destroy(Skill $skill)
     {
-        //
+        $skill->delete();
+        return redirect()->back();
     }
 }

@@ -32,7 +32,11 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('profiles.projects.create');
+        $prev = str_replace(url('/'), '', url()->previous());
+        $next = true;
+        if($prev=='/profile')
+            $next = false;
+        return view('profiles.projects.create',compact('next'));
     }
 
     /**
@@ -76,7 +80,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('profiles.projects.edit',compact('project'));
     }
 
     /**
@@ -88,7 +92,18 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $validatedData = $request->validate(
+            [
+                'name'=>'string|required',
+                'description' => 'required|max:1000',
+                'start'=>'date|required',
+                'end'=>'date|required|after_or_equal:start',
+                'url'=>'string',
+            ]
+        );
+
+        $project->update($validatedData);
+        return redirect()->back();
     }
 
     /**

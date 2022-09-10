@@ -28,6 +28,7 @@ class UsersTableSeeder extends Seeder
             'phone'=>'0548404996',
             'password'=>bcrypt('asd12345'),
         ]);
+        $user->syncRoles('student');
 
         $student = $user->student()->create(
             [

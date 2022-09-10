@@ -33,7 +33,12 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-        return view('profiles.experiences.create');
+        $prev = str_replace(url('/'), '', url()->previous());
+        $next = true;
+        if($prev=='/profile')
+            $next = false;
+
+        return view('profiles.experiences.create',compact('next'));
     }
 
     /**
@@ -84,7 +89,7 @@ class ExperienceController extends Controller
      */
     public function edit(Experience $experience)
     {
-        //
+        return view('profiles.experiences.edit',compact('experience'));
     }
 
     /**
@@ -96,7 +101,27 @@ class ExperienceController extends Controller
      */
     public function update(Request $request, Experience $experience)
     {
-        //
+        $validatedData = null;
+        if($request->has('still')){
+            $validatedData = $request->validate([
+                'company' => 'string|required|min:2',
+                'position' => 'string|required|min:2',
+                'description' => 'max:1000',
+                'start' => 'date|required'
+            ]);
+            $validatedData['end']=null;
+        }else{
+            $validatedData = $request->validate([
+                'company' => 'string|required|min:2',
+                'position' => 'string|required|min:2',
+                'description' => 'max:1000',
+                'start' => 'date|required',
+                'end' => 'date|required|after_or_equal:start',
+            ]);
+        }
+
+        $experience->update($validatedData);
+        return redirect()->back();
     }
 
     /**
