@@ -2,7 +2,12 @@
 
 @section('content')
 <div class="container">
-    <h3>{{__('Create project')}}</h3>
+    @if($next)
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 56%;" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100">56%</div>
+        </div>
+    @endif
+    <h3>{{__('Add project')}}</h3>
     <hr>
     <form action="{{route('projects.store')}}" method="post">
         @csrf
@@ -84,7 +89,7 @@
                     {{ __('Add') }}
                 </button>
                 @if($next)
-                    <a href="">{{__('Next')}}</a>
+                    <a href="{{route('certifications.create')}}">{{__('Next')}}</a>
                 @endif
 
 

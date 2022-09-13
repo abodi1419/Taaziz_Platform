@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Skill;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
-class SkillController extends Controller
+class ContactController extends Controller
 {
     /**
-     * SkillController constructor.
+     * ContactController constructor.
      */
     public function __construct()
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,22 +32,8 @@ class SkillController extends Controller
      */
     public function create()
     {
-
-        $prev = str_replace(url('/'), '', url()->previous());
-        if($prev=='/profile/create'){
-            session(['next' => true]);
-            session()->forget('num');
-        }
-
-
         $next = session('next');
-
-        if(!session('num')){
-            session(['num'=>0]);
-        }
-        $num = session('num');
-
-        return view('profiles.skills.create',compact('next','num'));
+        return view('profiles.contacts.create',compact('next'));
     }
 
     /**
@@ -58,22 +45,34 @@ class SkillController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'skill'=>'required|min:2'
+            'type'=>['required','in:tel,email,url'],
         ]);
-        $num = session('num');
-        $num++;
-        session(['num'=>$num]);
-        auth()->user()->student->profile->skills()->create($request->all());
+        if($validatedData['type']=='tel'){
+            $request->validate(
+                ['contact'=>['numeric','required','digits:10']]
+            );
+        }elseif ($validatedData['type']=='email'){
+            $request->validate(
+                ['contact'=>['email','required']]
+            );
+        }else{
+            $request->validate(
+                ['contact'=>['url','required','max:255']]
+            );
+        }
+        $validatedData['contact'] = $request->contact;
+
+        auth()->user()->student->profile->contacts()->create($validatedData);
         return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Skill  $skill
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function show(Skill $skill)
+    public function show(Contact $contact)
     {
         //
     }
@@ -81,10 +80,10 @@ class SkillController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Skill  $skill
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit(Skill $skill)
+    public function edit(Contact $contact)
     {
         //
     }
@@ -93,10 +92,10 @@ class SkillController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Skill  $skill
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Skill $skill)
+    public function update(Request $request, Contact $contact)
     {
         //
     }
@@ -104,12 +103,12 @@ class SkillController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Skill  $skill
+     * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Skill $skill)
+    public function destroy(Contact $contact)
     {
-        $skill->delete();
+        $contact->delete();
         return redirect()->back();
     }
 }

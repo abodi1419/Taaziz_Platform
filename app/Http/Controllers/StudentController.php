@@ -6,6 +6,7 @@ use App\Models\Student;
 use App\Models\User;
 use App\Rules\KAUEmailValidation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 
 class StudentController extends Controller
@@ -67,10 +68,18 @@ class StudentController extends Controller
         }else{
             $validatedData['is_employed']='0';
         }
+        $validatedData['password'] = bcrypt($validatedData['password']);
         $user = User::create($validatedData);
         $user->student()->create($validatedData);
         $user->syncRoles('student');
-        return redirect()->back()->with('success',__("User was added successfully"));
+        if(auth()->attempt(array('email' => $validatedData['email'], 'password' => $request->password))){
+            return redirect()->to('/');
+        }else{
+
+            return redirect()->route('login')->with('error','Email-Address And Password Are Wrong.');
+
+        }
+
     }
 
 
@@ -104,6 +113,7 @@ class StudentController extends Controller
         if($student->user->id!=$user->id){
             abort(403,'Not authorized');
         }
+
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255',new KAUEmailValidation(), 'unique:users,email,'.$user->id],
@@ -122,6 +132,23 @@ class StudentController extends Controller
                 'password' => ['required', 'string', 'min:8', 'confirmed']
             ]);
             $validatedData['password']=bcrypt($request->password);
+        }
+        $file=$request->file('image');
+        if($file!=null){
+            $request->validate([
+                'image'=>'required|mimes:jpeg,jpg,png,svg|required|max:10000'
+            ]);
+            $fileName =time().'.'.$file->getClientOriginalExtension();
+            $upload = ['file_name'=>$fileName];
+            if(is_file($user->image)&&!str_contains($user->image,"default.png"))
+                unlink($user->image);
+            Storage::disk('local')->putFileAs(
+                'public/uploads/icons/',
+                $file,
+                $fileName
+            );
+            $validatedData['image']='storage/uploads/icons/'.$fileName;
+
         }
 
         $student->update($validatedData);

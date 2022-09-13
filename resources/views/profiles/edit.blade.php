@@ -2,18 +2,31 @@
 
 @section('content')
 <div class="container">
-    <h3>{{__('Edit user')}}</h3>
+    <h3>{{__('Update profile')}}</h3>
     <hr>
-    <form action="{{route('student.update', $student)}}" method="post">
+    <form action="{{route('profile.update',$profile)}}" method="post">
         @csrf
         @method('PUT')
         <div class="row mb-3">
-            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+            <label for="major" class="col-md-4 col-form-label text-md-end">{{ __('Major') }}</label>
 
             <div class="col-md-6">
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
+                <input id="major" type="text" class="form-control @error('major') is-invalid @enderror" name="major" value="{{ $profile->major }}" required autocomplete="major" autofocus>
 
-                @error('name')
+                @error('major')
+                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="bio" class="col-md-4 col-form-label text-md-end">{{ __('Bio') }}</label>
+
+            <div class="col-md-6">
+                <textarea name="bio" id="bio" cols="30" rows="10" class="form-control @error('bio') is-invalid @enderror">{{ $profile->bio  }}</textarea>
+
+                @error('bio')
                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -22,25 +35,12 @@
         </div>
 
         <div class="row mb-3">
-            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+            <label for="gpa" class="col-md-4 col-form-label text-md-end">{{ __('GPA') }}</label>
 
             <div class="col-md-6">
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">
+                <input id="gpa" type="number" max="5" min="1" step="0.01" class="form-control @error('gpa') is-invalid @enderror" name="gpa" value="{{ $profile->gpa }}" placeholder="5.00" required autocomplete="gpa" autofocus>
 
-                @error('email')
-                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('Phone number') }}</label>
-
-            <div class="col-md-6">
-                <input id="phone" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $user->phone }}" placeholder="05XXXXXXXX" required autocomplete="phone" autofocus>
-
-                @error('phone')
+                @error('gpa')
                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -48,81 +48,32 @@
             </div>
         </div>
 
-        <div class="row mb-3">
-            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-            <div class="col-md-6">
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
-
-                @error('password')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-        </div>
 
         <div class="row mb-3">
-            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-            <div class="col-md-6">
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="sid" class="col-md-4 col-form-label text-md-end">{{ __('Student id') }}</label>
-
-            <div class="col-md-6">
-                <input id="sid" type="number" class="form-control @error('sid') is-invalid @enderror" name="sid" value="{{ $student->sid }}" placeholder="1850325" required autocomplete="sid" autofocus>
-
-                @error('sid')
-                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="dob" class="col-md-4 col-form-label text-md-end">{{ __('Date of birth') }}</label>
-
-            <div class="col-md-6">
-                <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ $student->dob }}" required autocomplete="dob" autofocus>
-
-                @error('dob')
-                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="graduation_date" class="col-md-4 col-form-label text-md-end">{{ __('Graduation date') }}</label>
-
-            <div class="col-md-6">
-                <input id="graduation_date" type="date" class="form-control @error('graduation_date') is-invalid @enderror" name="graduation_date" value="{{$student->graduation_date }}" required autocomplete="graduation_date" autofocus>
-
-                @error('graduation_date')
-                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row mb-3">
+            <label for="p">{{__("Profile visibility")}}</label>
             <div class="col-md-6 offset-md-4">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="is_employed" id="is_employed" {{ $student->is_employed ? 'checked' : '' }}>
+                    <input class="form-check-input" type="radio" name="state" value="2" id="p" {{ $profile->state==2 ? 'checked' : '' }}>
 
-                    <label class="form-check-label" for="is_employed">
-                        {{ __('Are you employed now?') }}
+                    <label class="form-check-label" for="p">
+                        {{ __('Public') }}
+                    </label><br>
+                    <input class="form-check-input" type="radio" name="state" value="1" id="c" {{ $profile->state==1 ? 'checked' : '' }}>
+
+                    <label class="form-check-label" for="c">
+                        {{ __('Companies only') }}
+                    </label><br>
+                    <input class="form-check-input" type="radio" name="state" value="0" id="pr" {{ $profile->state==0 ? 'checked' : '' }}>
+
+                    <label class="form-check-label" for="pr">
+                        {{ __('Private') }}
                     </label>
                 </div>
             </div>
         </div>
+
+
+
 
 
         <div class="row mb-0">

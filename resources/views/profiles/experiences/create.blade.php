@@ -2,7 +2,12 @@
 
 @section('content')
 <div class="container">
-    <h3>{{__('Create profile')}}</h3>
+    @if($next)
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 42%;" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100">42%</div>
+        </div>
+    @endif
+    <h3>{{__('Add experience')}}</h3>
     <hr>
 
     <form action="{{route('experiences.store')}}" method="post">

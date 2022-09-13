@@ -32,10 +32,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $prev = str_replace(url('/'), '', url()->previous());
-        $next = true;
-        if($prev=='/profile')
-            $next = false;
+        $next = session('next');
         return view('profiles.projects.create',compact('next'));
     }
 
@@ -53,7 +50,7 @@ class ProjectController extends Controller
                 'description' => 'required|max:1000',
                 'start'=>'date|required',
                 'end'=>'date|required|after_or_equal:start',
-                'url'=>'string',
+                'url'=>'',
             ]
         );
         auth()->user()->student->profile->projects()->create($validatedData);
@@ -98,7 +95,7 @@ class ProjectController extends Controller
                 'description' => 'required|max:1000',
                 'start'=>'date|required',
                 'end'=>'date|required|after_or_equal:start',
-                'url'=>'string',
+                'url'=>'',
             ]
         );
 

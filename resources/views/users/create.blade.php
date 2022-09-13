@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h3>{{__('Create User')}}</h3>
+    <h3>{{__('Create user')}}</h3>
     <hr>
     <form action="{{route('users.store')}}" id="myForm" method="post">
         @csrf

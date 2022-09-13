@@ -29,12 +29,12 @@
                     <td>{{$user->created_at}}</td>
                     <td>
                         <div class="row">
-                            <div class="col"><a href="{{route("users.show",$user)}}">View User</a></div>
-                            <div class="col"><a href="{{route("users.edit",$user)}}">Edit User</a></div>
+                            <div class="col"><a href="{{route("users.show",$user)}}">{{__('View user')}}</a></div>
+                            <div class="col"><a href="{{route("users.edit",$user)}}">{{__('Edit user')}}</a></div>
                             <form id="deleteForm" action="{{route("users.destroy",$user)}}" method="post">
                                 @csrf
                                 @method("DELETE")
-                                <button type="submit" class="btn btn-danger">Delete User</button>
+                                <button type="submit" class="btn btn-danger">{{__('Delete user')}}</button>
                             </form>
                         </div>
                     </td>
@@ -43,7 +43,7 @@
             </tbody>
         </table>
     @endforeach
-    <a class="btn btn-primary" href="{{route("users.create")}}">{{__("Create User")}}</a>
+    <a class="btn btn-primary" href="{{route("users.create")}}">{{__("Create user")}}</a>
 </div>
 
 

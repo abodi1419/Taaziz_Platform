@@ -18,12 +18,12 @@
                 <td>{{$role->name}}</td>
                 <td>
                     <div class="row">
-                        <div class="col"><a href="{{route("roles.show",$role)}}">View Role</a></div>
-                        <div class="col"><a href="{{route("roles.edit",$role)}}">Edit Role</a></div>
+                        <div class="col"><a href="{{route("roles.show",$role)}}">{{__('View role')}}</a></div>
+                        <div class="col"><a href="{{route("roles.edit",$role)}}">{{__('Edit role')}}</a></div>
                         <form id="deleteForm" action="{{route("roles.destroy",$role)}}" method="post">
                             @csrf
                             @method("DELETE")
-                            <button type="submit" class="btn btn-danger">Delete Role</button>
+                            <button type="submit" class="btn btn-danger">{{__("Delete role")}}</button>
                         </form>
                     </div>
                 </td>

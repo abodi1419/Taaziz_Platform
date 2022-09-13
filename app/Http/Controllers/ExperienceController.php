@@ -33,10 +33,8 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-        $prev = str_replace(url('/'), '', url()->previous());
-        $next = true;
-        if($prev=='/profile')
-            $next = false;
+        $next = session('next');
+        session()->forget('num');
 
         return view('profiles.experiences.create',compact('next'));
     }

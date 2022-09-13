@@ -23,4 +23,13 @@ class Profile extends Model
     public function projects(){
         return $this->hasMany(Project::class,'profile_id','id');
     }
+    public function certifications(){
+        return $this->hasMany(Certification::class,'profile_id','id');
+    }
+    public function languages(){
+        return $this->hasMany(Language::class,'profile_id','id');
+    }
+    public function contacts(){
+        return $this->hasMany(Contact::class,'profile_id','id');
+    }
 }

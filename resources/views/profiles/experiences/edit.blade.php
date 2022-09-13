@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h3>{{__('Create profile')}}</h3>
+    <h3>{{__('Edit experience')}}</h3>
     <hr>
 
     <form action="{{route('experiences.update',$experience)}}" method="post">

@@ -14,10 +14,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    if(!auth()->user()){
+        return redirect()->to('login');
+    }
+    else{
+        return view('home');
+    }
 });
 
-Auth::routes();
+//Auth::routes();
+// Authentication Routes...
+Route::get('login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'App\Http\Controllers\Auth\LoginController@login');
+Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+
+// Registration Routes...
+Route::get('register', [App\Http\Controllers\StudentController::class, 'create'])->name('register');
+//$this->post('register', 'Auth\RegisterController@register');
+
+// Password Reset Routes...
+Route::get('password/reset', 'App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'App\Http\Controllers\Auth\ResetPasswordController@reset');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('roles', App\Http\Controllers\RoleController::class);
@@ -27,3 +46,15 @@ Route::resource('profile',\App\Http\Controllers\ProfileController::class)->excep
 Route::resource('skills',\App\Http\Controllers\SkillController::class)->except('show');
 Route::resource('experiences',\App\Http\Controllers\ExperienceController::class)->except('show');
 Route::resource('projects',\App\Http\Controllers\ProjectController::class)->except('show');
+Route::resource('certifications',\App\Http\Controllers\CertificationController::class)->except('show');
+Route::resource('languages',\App\Http\Controllers\LanguageController::class)->except('show');
+Route::resource('contacts',\App\Http\Controllers\ContactController::class)->except('show');
+Route::get('/locale/{locale}', function ($locale) {
+    if (! in_array($locale, ['en', 'ar'])) {
+        abort(400);
+    }
+    session(['my_locale' => $locale]);
+
+    return redirect()->back();
+    //
+});

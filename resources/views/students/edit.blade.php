@@ -4,9 +4,28 @@
 <div class="container">
     <h3>{{__('Edit user')}}</h3>
     <hr>
-    <form action="{{route('student.update', $student)}}" method="post">
+    <div class="text-center mb-3">
+        <img src="{{asset($user->image)}}" id="preview" style="background: transparent;" height="150" alt="">
+    </div>
+    <form action="{{route('student.update', $student)}}" method="post"  enctype="multipart/form-data">
         @csrf
         @method('PUT')
+        <div class="row mb-3">
+            <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Image') }}</label>
+
+            <div class="col-md-5">
+                <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ $user->image }}" autocomplete="image" autofocus>
+
+                @error('image')
+                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
+            </div>
+            <div class="col-md-1 text-center">
+                <button type="button" id="remove-image" class="btn btn-danger">{{__('Remove')}}</button>
+            </div>
+        </div>
         <div class="row mb-3">
             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
@@ -136,7 +155,25 @@
     </form>
 
 </div>
+<script>
+    var imgInp = document.getElementById('image');
+    var preview = document.getElementById('preview');
+    imgInp.onchange = evt => {
+        const [file] = imgInp.files
+        if (file) {
+            preview.src = URL.createObjectURL(file)
+        }
+    }
 
+    let button = document.getElementById("remove-image")
+    button.addEventListener('click', function () {
+        imgInp.value = '';
+        preview.src = '{{asset($user->image)}}'
+
+    })
+
+
+</script>
 
 
 @endsection

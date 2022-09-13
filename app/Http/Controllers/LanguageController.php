@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Skill;
+use App\Models\Language;
 use Illuminate\Http\Request;
 
-class SkillController extends Controller
+class LanguageController extends Controller
 {
-    /**
-     * SkillController constructor.
-     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -31,22 +28,8 @@ class SkillController extends Controller
      */
     public function create()
     {
-
-        $prev = str_replace(url('/'), '', url()->previous());
-        if($prev=='/profile/create'){
-            session(['next' => true]);
-            session()->forget('num');
-        }
-
-
         $next = session('next');
-
-        if(!session('num')){
-            session(['num'=>0]);
-        }
-        $num = session('num');
-
-        return view('profiles.skills.create',compact('next','num'));
+        return view('profiles.languages.create',compact('next'));
     }
 
     /**
@@ -57,23 +40,29 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
+        $levels = ['Beginner','Intermediate','Proficient','Fluent','Native'];
         $validatedData = $request->validate([
-            'skill'=>'required|min:2'
+            'language'=>['string','required'],
+            'level' => ['numeric','required'],
         ]);
-        $num = session('num');
-        $num++;
-        session(['num'=>$num]);
-        auth()->user()->student->profile->skills()->create($request->all());
+        $level = round($validatedData['level']/20-1);
+        if($level>4 || $level<0){
+            abort(403,'Something went wrong!');
+        }
+
+
+        $validatedData['level']= $levels[$level];
+        auth()->user()->student->profile->languages()->create($validatedData);
         return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Skill  $skill
+     * @param  \App\Models\Language  $language
      * @return \Illuminate\Http\Response
      */
-    public function show(Skill $skill)
+    public function show(Language $language)
     {
         //
     }
@@ -81,10 +70,10 @@ class SkillController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Skill  $skill
+     * @param  \App\Models\Language  $language
      * @return \Illuminate\Http\Response
      */
-    public function edit(Skill $skill)
+    public function edit(Language $language)
     {
         //
     }
@@ -93,10 +82,10 @@ class SkillController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Skill  $skill
+     * @param  \App\Models\Language  $language
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Skill $skill)
+    public function update(Request $request, Language $language)
     {
         //
     }
@@ -104,12 +93,12 @@ class SkillController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Skill  $skill
+     * @param  \App\Models\Language  $language
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Skill $skill)
+    public function destroy(Language $language)
     {
-        $skill->delete();
+        $language->delete();
         return redirect()->back();
     }
 }

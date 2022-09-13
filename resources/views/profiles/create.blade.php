@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 14%;" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100">14%</div>
+    </div>
+
     <h3>{{__('Create profile')}}</h3>
     <hr>
     <form action="{{route('profile.store')}}" method="post">
@@ -24,7 +29,7 @@
             <label for="bio" class="col-md-4 col-form-label text-md-end">{{ __('Bio') }}</label>
 
             <div class="col-md-6">
-                <textarea name="bio" id="bio" cols="30" rows="10" class="form-control @error('bio') is-invalid @enderror">{{ old('gpa') }}</textarea>
+                <textarea name="bio" id="bio" cols="30" rows="10" class="form-control @error('bio') is-invalid @enderror">{{ old('bio') }}</textarea>
 
                 @error('bio')
                 <span class="invalid-feedback" role="alert">
