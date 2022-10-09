@@ -58,3 +58,23 @@ Route::get('/locale/{locale}', function ($locale) {
     return redirect()->back();
     //
 });
+Route::get('hello/{name}',function ($name){
+    return "hello ".$name;
+});
+Route::get('/user-icon/{file}', function ($file){
+    //This method will look for the file and get it from drive
+
+    $path = 'storage/uploads/icons/' . $file;
+//    return $path;
+    try {
+        $file = File::get($path);
+        $type = File::mimeType($path);
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+        return $response;
+    } catch (FileNotFoundException $exception) {
+        abort(301);
+    }
+});
+
+
