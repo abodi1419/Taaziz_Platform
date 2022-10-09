@@ -58,3 +58,15 @@ Route::get('/locale/{locale}', function ($locale) {
     return redirect()->back();
     //
 });
+
+
+Route::resource('articles',\App\Http\Controllers\ArticleController::class);
+
+Route::post('comments/{article}','\App\Http\Controllers\CommentController@store')->name('comments.store');
+//Route::resource('comments',\App\Http\Controllers\CommentController::class);
+
+
+Route::get('/myArticles', [App\Http\Controllers\MyArticlesController::class, 'index'])->name('myArticles');
+Route::get('/like', '\App\Http\Controllers\ArticleController@like')->name('articles.like');
+Route::resource('dashboard', App\Http\Controllers\DashboardController::class);
+Route::resource('jobs', App\Http\Controllers\JobsController::class);
