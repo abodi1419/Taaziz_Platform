@@ -99,5 +99,38 @@
     "Edit project": "تعديل المشروع",
     "Until now": "حتى الآن",
     "Add language": "إضافة لغة",
-    "Update profile": "تحديث الملف"
+    "Update profile": "تحديث الملف",
+    
+    
+    "Ta'aziz-Platform": "منصة تعزيز",
+    "Posts": "المشاركات",
+    "All Posts": "جميع المشاركات",
+    "my Posts": "مشاركاتي",
+    "Author": "كتابة",
+    "Author_comment": "تعليق",
+    "Add New Post": "إضافة منشور جديد",
+    "Delete": "حذف",
+    "Like": "اعجاب",
+    "Created at": "نشر في",
+    "Updated at": "اخر تحديث",
+    "Comments": "تعليقات",
+    "Type your comment here": "اكتب تعليقك هنا",
+    "Save": "حفظ",
+    "Community": "المجتمع",
+    "Add a new article/discussion": "اضف مقال/نقاش جديد",
+    "All articles/discussions": "كل المقالات/النقاشات",
+    "My articles/discussions": "مقالاتي/نقاشاتي",
+
+
+    "Jobs": "وظائف",
+    "Jobs from college": "وظائف من الكلية",
+    "smart search": "البحث الذكي",
+    "All jobs / internship": "جميع الوظائف / التدريب",
+    "Name": "الاسم",
+    "Type": "النوع",
+    "Location": "الموقع",
+    "Apply": "تقديم",
+    "Full-time": "دوام كامل",
+    "Part-time": "دوام جزئي",
+    "internship": "تدريب"
 }
