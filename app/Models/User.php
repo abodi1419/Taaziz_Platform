@@ -43,5 +43,17 @@ class User extends Authenticatable
         return $this->hasOne(Student::class,'user_id','id');
     }
 
+    public function articles(){
+        return $this->hasMany(Article::class,'user_id','id');
+    }
+
+    public function jobs(){
+        return $this->hasMany(Job::class,'user_id','id');
+    }
+    public function likes(){
+        return $this->hasMany(Like::class,'user_id','id');
+    }
+
+
 
 }

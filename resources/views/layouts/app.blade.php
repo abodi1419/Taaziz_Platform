@@ -133,7 +133,32 @@
                                         </div>
                                     </li>
                                 @endcan
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ __("Blog") }}
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="roleDropdown">
+                                        <a class="dropdown-item" href="{{route('articles.index')}}">{{__("All articles")}}</a>
+                                        <a class="dropdown-item" href="{{route('myArticles')}}">{{__("My articles")}}</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ __("Jobs") }}
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="roleDropdown">
+                                        @can('Job create')
+                                            <a class="dropdown-item" href="{{route('jobs.create')}}">{{__("New job")}}</a>
+                                        @endcan
+                                        @can('Job list')
+                                            <a class="dropdown-item" href="{{route('jobs.index')}}">{{__("Show jobs")}}</a>
+                                        @endcan
+                                    </div>
+                                </li>
                             @endauth
+
 
                         </ul>
                         <ul class="navbar-nav justify-content-end pe-3">
@@ -154,10 +179,15 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="{{ route('logout') }}">
-
-                                                        {{ __('Logout') }}
+                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                    {{ __('Logout') }}
                                                 </a>
+
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                    @csrf
+                                                </form>
                                             </li>
                                         </ul>
                                     </div>

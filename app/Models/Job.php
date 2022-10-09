@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class jobs extends Model
+class Job extends Model
 {
     use HasFactory;
 
@@ -14,13 +14,11 @@ class jobs extends Model
         'company_name',
         'company_phone',
         'company_website',
-        'company_info',
-        'job_title',
-        'job_types',
-        'job_location',
-        'job_description',
-        'apply_by',
-        'apply_by_link_Email'
+        'company_speciality',
+        'title',
+        'type',
+        'location',
+        'description',
     ];
 
     public function user(){

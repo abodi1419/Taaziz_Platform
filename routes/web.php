@@ -49,6 +49,7 @@ Route::resource('projects',\App\Http\Controllers\ProjectController::class)->exce
 Route::resource('certifications',\App\Http\Controllers\CertificationController::class)->except('show');
 Route::resource('languages',\App\Http\Controllers\LanguageController::class)->except('show');
 Route::resource('contacts',\App\Http\Controllers\ContactController::class)->except('show');
+Route::resource('categories',\App\Http\Controllers\CategoryController::class)->except(['show','update','edit']);
 Route::get('/locale/{locale}', function ($locale) {
     if (! in_array($locale, ['en', 'ar'])) {
         abort(400);
@@ -84,8 +85,18 @@ Route::post('comments/{article}','\App\Http\Controllers\CommentController@store'
 
 
 Route::get('/myArticles', [App\Http\Controllers\MyArticlesController::class, 'index'])->name('myArticles');
-Route::get('/like', '\App\Http\Controllers\ArticleController@like')->name('articles.like');
-Route::resource('dashboard', App\Http\Controllers\DashboardController::class);
+Route::get('/like/{article}', function (\App\Models\Article $article){
+    $user_id = \Illuminate\Support\Facades\Auth::user()->id;
+    $hasLiked = $article->likes()->where('user_id','=',$user_id)->first();
+    if($hasLiked){
+        $hasLiked->delete();
+        return redirect()->back()->with(['success','removed']);
+    }else{
+        $article->likes()->create(['user_id'=>$user_id]);
+        return redirect()->back()->with(['success','added']);
+    }
+});
+//Route::resource('dashboard', App\Http\Controllers\DashboardController::class);
 Route::resource('jobs', App\Http\Controllers\JobsController::class);
 
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 
-@section('title', $jobs->job_title)
+@section('title', $job->title)
 
 
 @section('content')
@@ -9,27 +9,29 @@
         <div class="card">
 
             <div class="card-header">
-                <h4 class="text-center">{{$jobs->job_title}}</h4>
-                <div><b>{{__('Company Name')}}: </b> {{$jobs->company_name}}</div>
-                <div><b>{{__('Job Type')}}: </b> {{$jobs->job_types}} </div>
-                <div><b>{{__('Job Location')}}: </b> {{$jobs->job_location}} </div>
-                <div><b>{{__('Posted at')}}: </b> {{$jobs->created_at}}, <b>{{__('Updated at')}}: </b> {{$jobs->updated_at}}</div>
+                <h4 class="text-center">{{$job->title}}</h4>
+                <div><b>{{__('Company Name')}}: </b> {{$job->company_name}}</div>
+                <div><b>{{__('Job Type')}}: </b> {{$job->type}} </div>
+                <div><b>{{__('Job Location')}}: </b> {{$job->location}} </div>
+                <div><b>{{__('Job Location')}}: </b> <a target="_blank" href="{{$job->company_website}}">Website</a></div>
+                <div><b>{{__('Posted at')}}: </b> {{date_format($job->created_at,'d/m/Y')}}, <b>{{__('Updated at')}}: </b> {{date_format($job->updated_at,'d/m/Y')}}</div>
                 <hr>
             </div>
 
             <div class="card-body">
-                {!! nl2br($jobs->job_description) !!}
+                {!! nl2br($job->description) !!}
             </div>
 
                 <div class="card-footer d-flex justify-content-center align-items-center">
-                    @if($jobs->apply_by == 'Link')
+{{--                    @if($job->apply_by == 'Link')--}}
 
-                        <button class="btn btn-success"><a href="{{url($jobs->apply_by_link_Email)}}" target="_blank" class="text-white">Apply</a></button>
+{{--                        <button class="btn btn-success"><a href="{{url($jobs->apply_by_link_Email)}}" target="_blank" class="text-white">Apply</a></button>--}}
 
-                    @else
-                        <button class="btn btn-success"><a href="mailto:{{($jobs->apply_by_link_Email)}}" target="_blank" class="text-white">Apply</a></button>
+{{--                    @else--}}
+{{--                        <button class="btn btn-success"><a href="mailto:{{($jobs->apply_by_link_Email)}}" target="_blank" class="text-white">Apply</a></button>--}}
 
-                    @endif
+{{--                    @endif--}}
+
 
                 </div>
         </div>

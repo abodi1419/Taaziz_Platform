@@ -14,8 +14,8 @@ class CreateArticleCategories extends Migration
     public function up()
     {
         Schema::create('article_categories', function (Blueprint $table) {
-            $table->unsignedInteger('article_id');
-            $table->unsignedInteger('category_id');
+            $table->unsignedBigInteger('article_id');
+            $table->unsignedBigInteger('category_id');
 
             $table->foreign('article_id')
                 ->references('id')

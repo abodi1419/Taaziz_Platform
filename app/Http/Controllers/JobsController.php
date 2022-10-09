@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\jobs;
+use App\Models\Job;
 use Illuminate\Http\Request;
-use Illuminate\Queue\Jobs\Job;
+
 use Illuminate\Support\Facades\Auth;
 
 class JobsController extends Controller
@@ -22,8 +22,8 @@ class JobsController extends Controller
      */
     public function index()
     {
-        $jobs = jobs::orderBy('id','DESC')->get();
-            return view("jobs.index",compact('jobs'));
+        $jobs = Job::orderBy('id','DESC')->get();
+        return view("jobs.index",compact('jobs'));
 
     }
 
@@ -49,38 +49,41 @@ class JobsController extends Controller
     public function store(Request $request)
     {
 
-//        dd($request->job_types);
-//        $validatedData = $request->validate([
-//            'company_name'=>'required|min:15',
-//            'company_phone' => 'min:7',
-//            'company_website',
-//            'company_info',
-//
-//            'job_title' =>'required|min:5',
-//            'job_types'=>'required',
-//            'job_location' =>'required',
-//            'job_description'=>'required|min:20',
-//
-//            'apply_by' =>'required',
-//            'apply_by_link_Email'=>'required|min:15',
-//
-//        ]);
+//        dd($request->all());
+        $validatedData = null;
+        if($request->has('is_remote')){
+            $validatedData = $request->validate([
+                    'company_name'=>'required|min:2|string|max:255',
+                    'company_phone' => 'min:7|string|required',
+                    'company_website'=>'url|required',
+                    'company_speciality'=>'string|required|max:255',
 
-        $job = new jobs();
-        $job->user_id = auth()->id();
-        $job->company_name = $request->company_name;
-        $job->company_phone = $request->company_phone;
-        $job->company_website = $request->company_website;
-        $job->company_info = $request->company_info;
+                    'title' =>'required|min:2',
+                    'type'=>'required|string',
+                    'description'=>'required|min:20',
+                ]
+            );
+            $validatedData['location'] = "Remote";
+        }else{
+            $validatedData = $request->validate([
+                'company_name'=>'required|min:2|string|max:255',
+                'company_phone' => 'min:7|string|required',
+                'company_website'=>'url|required',
+                'company_speciality'=>'string|required|max:255',
 
-        $job->job_title = $request->job_title;
-        $job->job_types = $request->job_types;
-        $job->job_location = $request->job_location;
-        $job->job_description = $request->job_description;
+                'title' =>'required|min:2',
+                'type'=>'required|string',
+                'location' =>'string|required|max:255',
+                'description'=>'required|min:20',
+                ]
+            );
+        }
 
-        $job->apply_by = $request->apply_by;
-        $job->apply_by_link_Email = $request->apply_by_link_Email;
-        $job->save();
+
+
+
+
+        Auth::user()->jobs()->create($validatedData);
 
         return redirect()->back();
 
@@ -89,22 +92,22 @@ class JobsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\jobs  $jobs
+     * @param  Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function show(jobs $jobs)
+    public function show(Job $job)
     {
 
-        return view('jobs.show', compact('jobs'));
+        return view('jobs.show', compact('job'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\jobs  $jobs
+     * @param  Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function edit(jobs $jobs)
+    public function edit(Job $job)
     {
         //
     }
@@ -113,10 +116,10 @@ class JobsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\jobs  $jobs
+     * @param  \App\Models\Job  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, jobs $jobs)
+    public function update(Request $request, Job $job)
     {
         //
     }
@@ -124,10 +127,10 @@ class JobsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\jobs  $jobs
+     * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(jobs $jobs)
+    public function destroy(Job $job)
     {
         //
     }

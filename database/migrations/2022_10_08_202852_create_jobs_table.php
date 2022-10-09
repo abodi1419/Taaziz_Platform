@@ -14,25 +14,22 @@ class CreateJobsTable extends Migration
     public function up()
     {
         Schema::create('jobs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->id();
+            $table->unsignedBigInteger('user_id');
 
 //            COMPANY DETAILS
             $table->string('company_name');
             $table->string('company_phone');
             $table->string('company_website');
-            $table->text('company_info');
+            $table->text('company_speciality');
 
 //            JOB DETAILS
-            $table->string('job_title');
-            $table->string('job_types');
-            $table->string('job_location');
-            $table->text('job_description');
+            $table->string('title');
+            $table->enum('type',['Full time','Part time','Internship']);
+            $table->string('location');
+            $table->text('description');
 
 //            HOW TO APPLY
-            $table->string('apply_by');
-            $table->string('apply_by_link_Email');
-
 
             $table->timestamps();
         });

@@ -26,6 +26,7 @@ class MyArticlesController extends Controller
     public function index()
     {
         $articles = Auth::user()->articles;
+//        dd($articles);
         return view('articles.myArticles', compact('articles'));
     }
 }

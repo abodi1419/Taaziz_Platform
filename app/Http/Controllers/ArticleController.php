@@ -115,9 +115,9 @@ class ArticleController extends Controller
         }
 
         $request->validate([
-           'title' => 'max:100|min:10|required',
-            'content' => 'min:140|required',
-            'categories' => 'required'
+           'title' => 'string|max:255|min:2|required',
+            'content' => 'string|min:50|required',
+            'categories' => 'required|exists:categories,title'
         ]);
 
 //        $article->title =  $request['title'];
@@ -149,33 +149,14 @@ class ArticleController extends Controller
         return redirect()->back();
     }
 
-
-    public function like(Request $request){
-        $like_status = $request->like_status;
-        $article_id = $request->article_id;
-
-        $like = DB::table('likes')
-            ->where('article_id', $article_id)
-            ->where('user_id', Auth::user()->id)
-            ->first();
-
-//        Create a like if it doesn't exist
-        if(!$like){
-            $new_like = new Like();
-            $new_like->article_id = $article_id;
-            $new_like->user_id = Auth::user()->id;
-            $new_like->like = 1;
-            $new_like->save();
-        }
-
-//        Delete a like if it exists
-        elseif ($like->like == 1){
-            DB::table('likes')
-                ->where('article_id', $article_id)
-                ->where('user_id', Auth::user()->id)
-                ->delete();
-        }
-
+    /**
+     * Like the specified article.
+     *
+     * @param  \App\Models\Article  $article
+     * @return \Illuminate\Http\Response
+     */
+    public function like(Article $article){
+        dd($article);
     }
 
 
