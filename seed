@@ -5,3 +5,4 @@ php artisan db:seed --class=RoleTableSeeder
 php artisan db:seed --class=UsersTableSeeder
 php artisan db:seed --class=CategoriesTableSeeder
 php artisan db:seed --class=ArticleTableSeeder
+php artisan db:seed --class=JobsTableSeeder

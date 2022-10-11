@@ -46,9 +46,9 @@
         </div>
         <div class="col">
             <label for="location">{{__('Job location')}}</label>
-            <input type="text" id="location" name="location" class="form-control" @isset($job) value="{{$job->location}}" @else value="{{old('location')}}" @endisset>
+            <input type="text" id="location" name="location" class="form-control" @if($job&&$job->location!="Remote") value="{{$job->location}}" @else value="{{old('location')}}" @endif @if(old('is_remote')||$job&&$job->location=='Remote') disabled @endif>
             <label for="is_remote">{{__('Remote')}}</label>
-            <input type="checkbox" id="is_remote" value="Remote" name="is_remote" @if(old('is_remote')) checked @endif onchange="if(this.checked) document.getElementById('location').disabled = true; else document.getElementById('location').disabled = false">
+            <input type="checkbox" id="is_remote" value="Remote" name="is_remote" @if(old('is_remote')||$job&&$job->location=="Remote") checked @endif onchange="if(this.checked) document.getElementById('location').disabled = true; else document.getElementById('location').disabled = false">
         </div>
     </div>
 </div>
