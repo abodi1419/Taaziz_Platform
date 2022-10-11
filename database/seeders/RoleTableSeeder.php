@@ -31,9 +31,11 @@ class RoleTableSeeder extends Seeder
         $role->givePermissionTo("Article edit");
         $role->givePermissionTo("Article delete");
 
-        $role->givePermissionTo("Student create");
-        $role->givePermissionTo("Student list");
-        $role->givePermissionTo("Student edit");
-        $role->givePermissionTo("Student delete");
+//        $role->givePermissionTo("Student create");
+//        $role->givePermissionTo("Student list");
+//        $role->givePermissionTo("Student edit");
+//        $role->givePermissionTo("Student delete");
+
+        $role->givePermissionTo("Job list");
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -98,5 +99,23 @@ Route::get('/like/{article}', function (\App\Models\Article $article){
 });
 //Route::resource('dashboard', App\Http\Controllers\DashboardController::class);
 Route::resource('jobs', App\Http\Controllers\JobsController::class);
+
+Route::get( '/search/articles', function (Request $request) {
+    $q = $request->q;
+//    dd($q);
+    if($q != ""){
+        $articles = \App\Models\Article::where( 'title', 'LIKE', '%' . $q . '%' )->orWhere( 'content', 'LIKE', '%' . $q . '%' )->orderBy('id','desc')->paginate(15);
+        $pagination = $articles->appends ( array (
+            'q' => $request->q,
+        ) );
+//        $articles = (new \Spatie\Searchable\Search())->registerModel(\App\Models\Article::class,['title','content'])->search($q);
+//        $articles = \App\Models\Article::search($q)->get();
+//        dd($articles);
+        if (count ( $articles ) > 0)
+            return view ( 'articles.index' ,compact('articles','q'));
+        return view ( 'articles.index',compact('articles','q') )->withMessage ( 'No Details found. Try to search again !' );
+    }
+    return redirect()->to('articles');
+} );
 
 

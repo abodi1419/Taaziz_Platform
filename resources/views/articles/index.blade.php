@@ -2,6 +2,19 @@
 
 @section('content')
     <div class="container">
+        <div class="container">
+            <form action="/search/articles" method="get" role="search">
+                {{ csrf_field() }}
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q"
+                           placeholder="Search articles" @isset($q) value="{{$q}}" @endisset> <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </span>
+                </div>
+            </form>
+        </div>
         <a href="{{route('articles.create')}}" class= "btn btn-lg btn-primary">{{__('Add a new article/discussion')}}</a>
         <br><br>
         <hr>
@@ -15,7 +28,11 @@
             <div class="card">
 
                 <div class="card-header  d-flex justify-content-center align-items-center">
+                    @if($article->image!==null)
+                        <img src="{{$article->image}}" height="250" width="100%" alt="">
+                    @else
                     <i class="fa fa-5x fa-picture-o"></i>
+                    @endif
                 </div>
 
                 <div class="card-body">
@@ -25,8 +42,12 @@
                 <div class="card-footer">
 {{--                    <i class="fa fa-commenting" aria-hidden="true"></i>--}}
 
-                    {{__('Author')}}: {{$article->user->name}} <hr>
-
+                    {{__('Author')}}: {{$article->user->name}}
+                    <br>
+                    {{__('Tags')}}: @foreach($article->categories as $cat)
+                                        {{$cat->title.', '}}
+                                    @endforeach
+                    <hr>
 {{--                    like count in articles section--}}
                     @php
                         $like_count = 0;
@@ -64,10 +85,12 @@
                 </div>
             </div>
         </div>
+
         @empty
         {{__('No articles yet')}}
 
        @endforelse
         </div>
+        {!! $articles->render() !!}
     </div>
     @endsection

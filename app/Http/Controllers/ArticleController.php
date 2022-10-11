@@ -24,7 +24,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::orderBy('id','DESC')->get();
+        $articles = Article::with('categories:title')->orderBy('id','DESC')->paginate(15);
         return view('articles.index',compact('articles'));
 
     }
@@ -157,6 +157,10 @@ class ArticleController extends Controller
      */
     public function like(Article $article){
         dd($article);
+    }
+
+    public function search($keyword){
+
     }
 
 
