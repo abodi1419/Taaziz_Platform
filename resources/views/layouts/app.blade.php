@@ -29,6 +29,14 @@
 {{--    <link href="{{ mix('css/app.css') }}" rel="stylesheet">--}}
     <link rel="icon" type="image/x-icon" href="{{url('kau.png')}}" />
     <link href="{{ asset('css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css" />
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+
+    <link rel="stylesheet" href="{{asset('css/quill.snow.css')}}" />
     @if(\Illuminate\Support\Facades\App::getLocale()!='ar')
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     @else
