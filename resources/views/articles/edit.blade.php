@@ -8,17 +8,12 @@
     <div class="container">
     <h2>{{__('Edit article/discussion')}}: {{$article->title}} </h2>
 
-<<<<<<< HEAD
     <form action="{{route('articles.update', $article)}}" method="post" onsubmit="onSubmit(this)">
-=======
-    <form action="{{route('articles.update', $article)}}" method="post">
->>>>>>> b963276e398391f613e84ab070690262fa0f214d
         @method('PATCH')
         @include('articles._form', ['submitText' =>__('Edit')])
 
     </form>
     </div>
-<<<<<<< HEAD
     <script src="{{asset('js/quill.min.js')}}"></script>
     <script src="{{asset('js/image-resize.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
@@ -52,7 +47,4 @@
 
         }
     </script>
-=======
-
->>>>>>> b963276e398391f613e84ab070690262fa0f214d
 @endsection

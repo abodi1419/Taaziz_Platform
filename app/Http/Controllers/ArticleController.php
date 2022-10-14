@@ -8,11 +8,8 @@ use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-=======
->>>>>>> b963276e398391f613e84ab070690262fa0f214d
 
 class ArticleController extends Controller
 {
@@ -54,17 +51,12 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
         $content = $request->content;
-=======
-
->>>>>>> b963276e398391f613e84ab070690262fa0f214d
         $request->validate([
             'title' => 'max:100|min:10|required',
             'content' => 'min:140|required',
             'categories' => 'required'
         ]);
-<<<<<<< HEAD
         if(str_contains($content,'img')){
             $exploded = explode("src=",$content);
             $imgs =[];
@@ -95,9 +87,6 @@ class ArticleController extends Controller
         $request['content'] = $content;
 
 //        dd($request->content);
-=======
-
->>>>>>> b963276e398391f613e84ab070690262fa0f214d
 
         $user = Auth::user();
         $categories = array_values($request->categories);
@@ -129,18 +118,12 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         // To verify that no one will change someone else's article
-<<<<<<< HEAD
 
-=======
->>>>>>> b963276e398391f613e84ab070690262fa0f214d
         if (Auth::id() != $article->user_id){
             return abort(401);
         }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> b963276e398391f613e84ab070690262fa0f214d
         $categories = Category::all()->pluck('title','id');
 
         $articleCategories = $article->categories()->pluck('id') ->toArray();
@@ -163,7 +146,6 @@ class ArticleController extends Controller
         if (Auth::id() != $article->user_id){
             return abort(401);
         }
-<<<<<<< HEAD
 //        dd($request->all());
         $content = $request->content;
         $request->validate([
@@ -207,15 +189,6 @@ class ArticleController extends Controller
 
 
 
-=======
-
-        $request->validate([
-           'title' => 'string|max:255|min:2|required',
-            'content' => 'string|min:50|required',
-            'categories' => 'required|exists:categories,title'
-        ]);
-
->>>>>>> b963276e398391f613e84ab070690262fa0f214d
 //        $article->title =  $request['title'];
 //        $article->content =  $request['content'];
 //        $article->save();

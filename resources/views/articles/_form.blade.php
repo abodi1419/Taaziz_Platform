@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <style>
     body > #standalone-container {
         margin: 50px auto;
@@ -8,8 +7,6 @@
         height: 350px;
     }
 </style>
-=======
->>>>>>> b963276e398391f613e84ab070690262fa0f214d
 @csrf
 <div class="form-group">
     <label for="title">{{__('Title')}}</label>
@@ -29,7 +26,6 @@
 
 <div class="form-group">
     <label for="content">{{__('Content')}}</label>
-<<<<<<< HEAD
     <textarea class="form-control" name="content" id="content" cols="30" rows="10" hidden> @isset($article) {{$article->content}} @endisset </textarea>
 
     <div id="standalone-container" dir="ltr">
@@ -82,9 +78,6 @@
 
 
 
-=======
-    <textarea class="form-control" name="content" id="content" cols="30" rows="10"> @isset($article) {{$article->content}} @endisset </textarea>
->>>>>>> b963276e398391f613e84ab070690262fa0f214d
 </div>
 
 <div class="form-group">
