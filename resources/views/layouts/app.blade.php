@@ -110,6 +110,12 @@
                                         </li>
                                     </ul>
                                 </div>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('home')}}" role="button">
+                                        {{ __('Home') }}
+                                    </a>
+                                </li>
                                 @if(auth()->user()->hasRole('student'))
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('profile.index')}}" role="button">
@@ -141,16 +147,18 @@
                                         </div>
                                     </li>
                                 @endcan
+                                @if(auth()->user()->hasRole('admin') ||auth()->user()->hasRole('student') )
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ __("Blog") }}
+                                        {{ __("Community") }}
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-left" aria-labelledby="roleDropdown">
-                                        <a class="dropdown-item" href="{{route('articles.index')}}">{{__("All articles")}}</a>
-                                        <a class="dropdown-item" href="{{route('myArticles')}}">{{__("My articles")}}</a>
+                                        <a class="dropdown-item" href="{{route('articles.index')}}">{{__("Public Page")}}</a>
+                                        <a class="dropdown-item" href="{{route('myArticles')}}">{{__("My Page")}}</a>
                                     </div>
                                 </li>
+                                @endif
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ __("Jobs") }}
@@ -163,8 +171,21 @@
                                         @can('Job list')
                                             <a class="dropdown-item" href="{{route('jobs.index')}}">{{__("Show jobs")}}</a>
                                         @endcan
+                                        @if(auth()->user()->hasRole('student'))
+                                            <a class="dropdown-item" href="{{route('myApplications')}}">{{__("my Applications")}}</a>
+                                        @endif
                                     </div>
                                 </li>
+
+                                {{--   It appears only to admin --}}
+                                @if(auth()->user()->hasRole('admin'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('home')}}" role="button">
+                                            {{ __('Statistics panel') }}
+                                        </a>
+                                    </li>
+                                @endif
+
                             @endauth
 
 
@@ -214,6 +235,11 @@
                                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                     </li>
                                 @endif
+                                    @if (Route::has('register'))
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('register_employer') }}">{{ __('Register as employers') }}</a>
+                                        </li>
+                                    @endif
 
                             @endauth
                         </ul>

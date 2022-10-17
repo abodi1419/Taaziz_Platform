@@ -12,8 +12,9 @@
     <label for="title">{{__('Title')}}</label>
     <input type="text" name="title" class="form-control" @isset($article) value="{{$article->title}}" @endisset>
 </div>
-
+<br>
 <div class="form-group">
+    <p>Tags</p>
     @foreach($categories as $key => $title)
 
         <label for="category_{{$key}}">{{$title}}</label>
@@ -23,7 +24,7 @@
 
     @endforeach
 </div>
-
+<br>
 <div class="form-group">
     <label for="content">{{__('Content')}}</label>
     <textarea class="form-control" name="content" id="content" cols="30" rows="10" hidden> @isset($article) {{$article->content}} @endisset </textarea>

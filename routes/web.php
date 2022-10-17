@@ -31,6 +31,8 @@ Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name(
 
 // Registration Routes...
 Route::get('register', [App\Http\Controllers\StudentController::class, 'create'])->name('register');
+Route::get('register_employer', [App\Http\Controllers\EmployerController::class, 'create'])->name('register_employer');
+
 //$this->post('register', 'Auth\RegisterController@register');
 
 // Password Reset Routes...
@@ -43,6 +45,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('roles', App\Http\Controllers\RoleController::class);
 Route::resource('users', App\Http\Controllers\UserManagementController::class);
 Route::resource('student',\App\Http\Controllers\StudentController::class)->except('show');
+Route::resource('employer',\App\Http\Controllers\EmployerController::class)->except('show');
 Route::resource('profile',\App\Http\Controllers\ProfileController::class)->except('show');
 Route::resource('skills',\App\Http\Controllers\SkillController::class)->except('show');
 Route::resource('experiences',\App\Http\Controllers\ExperienceController::class)->except('show');
@@ -97,8 +100,20 @@ Route::get('/like/{article}', function (\App\Models\Article $article){
         return redirect()->back()->with(['success','added']);
     }
 });
-//Route::resource('dashboard', App\Http\Controllers\DashboardController::class);
 Route::resource('jobs', App\Http\Controllers\JobsController::class);
+Route::resource('applications',\App\Http\Controllers\JobApplicationsController::class);
+
+// The user can view the jobs he has applied for and view the status of the application
+Route::get('/myApplications', [App\Http\Controllers\myApplicationsController::class, 'index'])->name('myApplications');
+
+//admin and employers
+//View all job applicants
+Route::get('viewApplicants', [App\Http\Controllers\JobApplicationsController::class, 'viewApplicants'])->name('applications.viewApplicants');
+//View job candidates
+Route::get('Candidates', [App\Http\Controllers\JobApplicationsController::class, 'Candidates'])->name('applications.Candidates');
+//view accepted applicants for the job
+Route::get('Accepted', [App\Http\Controllers\JobApplicationsController::class, 'Accepted'])->name('applications.Accepted');
+
 
 Route::get( '/search/articles', function (Request $request) {
     $q = $request->q;

@@ -3,11 +3,11 @@
 @section('content')
     <div class="container">
         @can('Job create')
-            <a href="{{route('jobs.create')}}" class= "btn btn-lg btn-primary">{{__('post a new job')}}</a>
+            <a href="{{route('jobs.create')}}" class= "btn btn-lg btn-primary">{{__('Post a new job')}}</a>
         @endcan
         <br><br>
         <hr>
-        <h3 class="text-primary text-center">{{__('All jobs / internship')}}</h3> <br>
+        <h3 class="text-primary text-center">{{__('jobs | internships')}}</h3> <br>
 
         <div class="row">
 
@@ -27,17 +27,35 @@
                             <p> {{__('Location')}}: {{$job->location}}</p>
                         </div>
 
-                        <div class="card-footer d-flex justify-content-center align-items-center">
-{{--                            @if($job->apply_by == 'Link')--}}
+{{--                        if the user is: graduated student --}}
+                        @if(auth()->user()->hasRole('student'))
+                            <div class="card-footer d-flex justify-content-center align-items-center">
+                                <form action="{{route('applications.store',$job->id)}}" method="post">
+                                    @csrf
+                                    <button class="btn btn-success" onclick="return confirm('{{__('Are you sure you want to apply for this opportunity?')}}');" >
+                                        {{__('Apply')}}
+                                    </button>
+                                </form>
+                            </div>
+                        @endif
 
-{{--                                <button class="btn btn-success"><a href="{{url($job->apply_by_link_Email)}}" target="_blank" class="text-white">Apply</a></button>--}}
+                        {{--   It appears only to admin --}}
+                        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('employer'))
+                            <div class="card-footer d-flex justify-content-center align-items-center bg-light">
+                                    @csrf
+                                    <a class="bg-light text-black" href="{{route('applications.viewApplicants',$job->id)}}">{{__('View Applicants')}}</a>
+                            </div>
 
-{{--                            @else--}}
-{{--                            <button class="btn btn-success"><a href="mailto:{{($job->apply_by_link_Email)}}" target="_blank" class="text-white">Apply</a></button>--}}
+                            <div class="card-footer d-flex justify-content-center align-items-center bg-warning">
+                                    @csrf
+                                <a class="bg-warning text-black" href="{{route('applications.Candidates',$job->id)}}">{{__('Candidates')}}</a>
+                            </div>
 
-{{--                            @endif--}}
-
-                        </div>
+                            <div class="card-footer d-flex justify-content-center align-items-center bg-success">
+                                    @csrf
+                                <a class="bg-success text-white" href="{{route('applications.Accepted',$job->id)}}">{{__('Accepted')}}</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             @empty
@@ -45,7 +63,5 @@
 
             @endforelse
         </div>
-
-
     </div>
 @endsection

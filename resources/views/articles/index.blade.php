@@ -15,10 +15,11 @@
                 </div>
             </form>
         </div>
-        <a href="{{route('articles.create')}}" class= "btn btn-lg btn-primary">{{__('Add a new article/discussion')}}</a>
+        <br>
+        <a href="{{route('articles.create')}}" class= "btn btn-lg btn-primary">{{__('Post +')}}</a>
         <br><br>
         <hr>
-        <h3 class="text-primary text-center">{{__('All articles/discussions')}}</h3> <br>
+        <h3 class="text-primary text-center">{{__('All Articles | Discussions | Events')}}</h3> <br>
     <div class="row">
 
         @forelse($articles as $article)

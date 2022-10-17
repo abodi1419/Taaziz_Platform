@@ -14,7 +14,7 @@
         }
     </style>
     <div class="container">
-    <h2>{{__('Create article/discussion')}}</h2>
+    <h2>{{__('Create Article | Discussion | Event')}}</h2>
 
     <form action="{{route('articles.store')}}" method="post" onsubmit="onSubmit(this)">
         @include('articles._form', ['submitText' =>__('Save')])

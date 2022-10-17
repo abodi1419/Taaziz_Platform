@@ -1,21 +1,21 @@
 @csrf
-<h4 class="pb-3">COMPANY DETAILS</h4>
+<h4 class="pb-3">{{__('EMPLOYER DETAILS')}}</h4>
 <div class="form-group">
     <div class="row">
         <div class="col">
-            <label for="company_name">{{__('Company Name')}}</label>
+            <label for="company_name">{{__('Employer Name')}}</label>
             <input type="text" name="company_name" id="company_name" class="form-control" @isset($job) value="{{$job->company_name}}" @else value="{{old('company_name')}}" @endisset>
         </div>
         <div class="col">
-            <label for="company_speciality">{{__('Company speciality')}}</label>
+            <label for="company_speciality">{{__('Speciality')}}</label>
             <input type="text" name="company_speciality" id="company_speciality" class="form-control" @isset($job) value="{{$job->company_speciality}}" @else value="{{old('company_speciality')}}" @endisset>
         </div>
         <div class="col">
-            <label for="company_phone">{{__('Company phone')}}</label>
+            <label for="company_phone">{{__('Phone')}}</label>
             <input type="text" name="company_phone" id="company_phone" class="form-control" @isset($job) value="{{$job->company_phone}}" @else value="{{old('company_phone')}}" @endisset>
         </div>
         <div class="col">
-            <label for="company_website">{{__('Company Website')}}</label>
+            <label for="company_website">{{__('Website')}}</label>
             <input type="url" name="company_website" id="company_website" class="form-control" @isset($job) value="{{$job->company_website}}" @else value="{{old('company_website')}}" @endisset>
         </div>
     </div>
@@ -29,7 +29,7 @@
 </div>
 
 <hr>
-<h4 class="pb-3">JOB DETAILS</h4>
+<h4 class="pb-3">{{__('JOB DETAILS')}}</h4>
 <div class="form-group">
     <div class="row">
         <div class="col">
@@ -39,9 +39,9 @@
         <div class="col">
             <label for="type">{{__('Job type')}}</label>
             <select  name="type" class="form-control" id="type">
-                <option @if(isset($job)&&$job->type=='Full time'||old('type')=='Full time') selected @endif value="Full time">Full time</option>
-                <option @if(isset($job)&&$job->type=='Part time'||old('type')=='Part time') selected @endif value="Part time">Part time</option>
-                <option @if(isset($job)&&$job->type=='Internship'||old('type')=='Internship') selected @endif value="Internship">Internship</option>
+                <option @if(isset($job)&&$job->type=='Full time'||old('type')=='Full time') selected @endif value="Full time">{{__('Full time')}}</option>
+                <option @if(isset($job)&&$job->type=='Part time'||old('type')=='Part time') selected @endif value="Part time">{{__('Part time')}}</option>
+                <option @if(isset($job)&&$job->type=='Internship'||old('type')=='Internship') selected @endif value="Internship">{{__('Internship')}}</option>
             </select>
         </div>
         <div class="col">

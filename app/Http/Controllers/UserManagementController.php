@@ -75,6 +75,7 @@ class UserManagementController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required','numeric']
                 ]);
+        $validatedData['password'] = bcrypt($validatedData['password']);
         $role = Role::findOrFail($validatedData['role']);
         $user = User::create($validatedData);
         $user->syncRoles($role);

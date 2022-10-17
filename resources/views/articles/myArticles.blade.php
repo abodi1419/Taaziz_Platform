@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="container">
-            <a href="{{route('articles.create')}}" class= "btn btn-lg btn-primary">{{__('Add a new article/discussion')}}</a>
+            <a href="{{route('articles.create')}}" class= "btn btn-lg btn-primary">{{__('Post +')}}</a>
             <br><br>
             <hr>
-            <h3 class="text-primary"> {{__('My articles/discussions')}} </h3> <br>
+            <h3 class="text-primary text-center"> {{__('My Articles | Discussions | Events')}} </h3> <br>
         <div class="row">
             @if(!$articles)
                 <p>{{__('You do not have any articles yet')}}</p>

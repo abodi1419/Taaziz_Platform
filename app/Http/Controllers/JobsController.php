@@ -34,10 +34,9 @@ class JobsController extends Controller
      */
     public function create()
     {
-        if(auth()->user()->id==1) { // 1==admin id
+
             return view('jobs.create');
-        }
-        return abort(404);
+
     }
 
     /**
@@ -85,7 +84,7 @@ class JobsController extends Controller
 
         Auth::user()->jobs()->create($validatedData);
 
-        return redirect()->back();
+        return redirect('jobs');
 
     }
 

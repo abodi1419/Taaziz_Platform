@@ -42,6 +42,9 @@ class User extends Authenticatable
     public function student(){
         return $this->hasOne(Student::class,'user_id','id');
     }
+    public function empolyer(){
+        return $this->hasOne(Employer::class,'user_id','id');
+    }
 
     public function articles(){
         return $this->hasMany(Article::class,'user_id','id');
@@ -52,6 +55,10 @@ class User extends Authenticatable
     }
     public function likes(){
         return $this->hasMany(Like::class,'user_id','id');
+    }
+
+    public function applications(){
+        return $this->hasMany(job_applications::class,'user_id','id');
     }
 
 
