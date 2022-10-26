@@ -174,9 +174,9 @@
 
                                             <a class="dropdown-item" href="{{route('jobs.index')}}">{{__("Show jobs")}}</a>
 
-                                        @if(auth()->user()->hasRole('student'))
-                                            <a class="dropdown-item" href="{{route('myApplications')}}">{{__("my Applications")}}</a>
-                                        @endif
+{{--                                        @if(auth()->user()->hasRole('student'))--}}
+{{--                                            <a class="dropdown-item" href="{{route('myApplications')}}">{{__("my Applications")}}</a>--}}
+{{--                                        @endif--}}
                                     </div>
                                 </li>
 

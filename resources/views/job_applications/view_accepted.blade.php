@@ -26,7 +26,7 @@
 
 
                             <div class="card-footer d-flex justify-content-center align-items-center bg-success">
-                                <div class="bg-success border-0 w-100">{{__('Accepted')}}</div>
+                                <div class="bg-success border-0 w-100 text-white text-center">{{__('.Accepted')}}</div>
 
                             </div>
                         </div>

@@ -44,27 +44,27 @@
                                 <form action="{{route('applications.store')}}" method="post">
                                     @csrf
                                     <input type="number"  name="job_id" value="{{$job->id}}" hidden>
-                                    <button class="btn btn-success" onclick="return confirm('{{__('Are you sure you want to apply for this opportunity?')}}');" >
+                                    <button class="btn btn-success text-center" onclick="return confirm('{{__('Are you sure you want to apply for this opportunity?')}}');" >
                                         {{__('Apply')}}
 
                                     </button>
                                 </form>
                                 @else
-                                    <div class="card-footer d-flex justify-content-center align-items-center text-white bg-secondary">
+{{--                                    <div class="card-footer d-flex justify-content-center align-items-center text-white">--}}
                                         @if($status==2)
-                                            <h5>{{__('Applied')}}</h5>
+                                            <h5 class="bg-secondary p-lg-2 text-white w-100 text-center">{{__('Applied')}}</h5>
                                         @elseif($status==3)
-                                            <h5>{{__('Candidated')}}</h5>
+                                            <h5 class="bg-warning p-lg-2 text-white w-100 text-center">{{__('Candidated')}}</h5>
 
                                         @elseif($status==4)
-                                            <h5>{{__('Accepted')}}</h5>
+                                            <h5 class="bg-success p-lg-2 text-white w-100 text-center">{{__('.Accepted')}}</h5>
 
                                         @elseif($status==1)
-                                            <h5>{{__('Rejected')}}</h5>
+                                            <h5 class="bg-danger p-lg-2 text-white w-100 text-center">{{__('Rejected')}}</h5>
 
 
                                         @endif
-                                    </div>
+{{--                                    </div>--}}
                                 @endif
                             </div>
                         @endif

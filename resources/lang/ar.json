@@ -157,5 +157,10 @@
     "Register as a student": "تسجيل كطالب",
     "Search": "بحث",
     "Tags": "تصنيفات",
-    "View Applications": "عرض المتقدمين للوظيفة"
+    "View Applications": "عرض المتقدمين للوظيفة",
+    "Rejected": "تم الاعتذار",
+    "Candidated": "تم الترشيح",
+    ".Accepted": "مقبول",
+    "Accept": "قبول",
+    "view profile": "عرض الملف الشخصي"
 }
