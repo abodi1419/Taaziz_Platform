@@ -18,12 +18,12 @@ class CommentController extends Controller
 //        dd($article->id);
 //        dd(Auth::user()->id);
 
-        $request->validate(['content' => 'required']);
+        $validatedData = $request->validate(['content' => 'required']);
 
-        $request['article_id'] = $article->id;
-        $request['user_id'] = Auth::id();
+        $validatedData['article_id'] = $article->id;
+        $validatedData['user_id'] = Auth::user()->id;
 
-        $article->comments()->create($request->all());
+        $article->comments()->create($validatedData);
 
         return redirect()->back();
     }

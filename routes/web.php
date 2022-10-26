@@ -46,7 +46,7 @@ Route::resource('roles', App\Http\Controllers\RoleController::class);
 Route::resource('users', App\Http\Controllers\UserManagementController::class);
 Route::resource('student',\App\Http\Controllers\StudentController::class)->except('show');
 Route::resource('employer',\App\Http\Controllers\EmployerController::class)->except('show');
-Route::resource('profile',\App\Http\Controllers\ProfileController::class)->except('show');
+Route::resource('profile',\App\Http\Controllers\ProfileController::class);
 Route::resource('skills',\App\Http\Controllers\SkillController::class)->except('show');
 Route::resource('experiences',\App\Http\Controllers\ExperienceController::class)->except('show');
 Route::resource('projects',\App\Http\Controllers\ProjectController::class)->except('show');
@@ -54,6 +54,7 @@ Route::resource('certifications',\App\Http\Controllers\CertificationController::
 Route::resource('languages',\App\Http\Controllers\LanguageController::class)->except('show');
 Route::resource('contacts',\App\Http\Controllers\ContactController::class)->except('show');
 Route::resource('categories',\App\Http\Controllers\CategoryController::class)->except(['show','update','edit']);
+
 Route::get('/locale/{locale}', function ($locale) {
     if (! in_array($locale, ['en', 'ar'])) {
         abort(400);
@@ -62,9 +63,6 @@ Route::get('/locale/{locale}', function ($locale) {
 
     return redirect()->back();
     //
-});
-Route::get('hello/{name}',function ($name){
-    return "hello ".$name;
 });
 Route::get('/user-icon/{file}', function ($file){
     //This method will look for the file and get it from drive
@@ -108,12 +106,34 @@ Route::get('/myApplications', [App\Http\Controllers\myApplicationsController::cl
 
 //admin and employers
 //View all job applicants
-Route::get('viewApplicants', [App\Http\Controllers\JobApplicationsController::class, 'viewApplicants'])->name('applications.viewApplicants');
+Route::get('applicants/{job}/show', [App\Http\Controllers\JobApplicationsController::class, 'showApplicants']);
 //View job candidates
-Route::get('Candidates', [App\Http\Controllers\JobApplicationsController::class, 'Candidates'])->name('applications.Candidates');
+Route::get('candidates/{job}/show', [App\Http\Controllers\JobApplicationsController::class, 'showCandidates']);
+Route::get('candidacy/{job_application}',[App\Http\Controllers\JobApplicationsController::class, 'candidacy']);
+Route::get('reject/{job_application}',[App\Http\Controllers\JobApplicationsController::class, 'reject']);
+Route::get('accept/{job_application}',[App\Http\Controllers\JobApplicationsController::class, 'accept']);
 //view accepted applicants for the job
-Route::get('Accepted', [App\Http\Controllers\JobApplicationsController::class, 'Accepted'])->name('applications.Accepted');
+Route::get('accepted/{job}/show', [App\Http\Controllers\JobApplicationsController::class, 'showAccepted'])->name('applications.Accepted');
 
+Route::get('users/activate/{user}',function (\App\Models\User $user){
+    if(!\Illuminate\Support\Facades\Auth::user()->hasRole('admin')){
+        abort(403,"Not authorized!");
+    }else{
+        $user->active = 1;
+        $user->save();
+        return redirect()->back();
+    }
+})->middleware('auth');
+
+Route::get('users/deactivate/{user}',function (\App\Models\User $user){
+    if(!\Illuminate\Support\Facades\Auth::user()->hasRole('admin')){
+        abort(403,"Not authorized!");
+    }else{
+        $user->active = 0;
+        $user->save();
+        return redirect()->back();
+    }
+})->middleware('auth');
 
 Route::get( '/search/articles', function (Request $request) {
     $q = $request->q;
@@ -131,6 +151,7 @@ Route::get( '/search/articles', function (Request $request) {
         return view ( 'articles.index',compact('articles','q') )->withMessage ( 'No Details found. Try to search again !' );
     }
     return redirect()->to('articles');
-} );
+});
+
 
 

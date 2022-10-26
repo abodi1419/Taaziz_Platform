@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','phone','image'
+        'name', 'email', 'password','phone','image','bio','active'
     ];
 
     /**
@@ -42,7 +42,7 @@ class User extends Authenticatable
     public function student(){
         return $this->hasOne(Student::class,'user_id','id');
     }
-    public function empolyer(){
+    public function employer(){
         return $this->hasOne(Employer::class,'user_id','id');
     }
 
@@ -58,7 +58,11 @@ class User extends Authenticatable
     }
 
     public function applications(){
-        return $this->hasMany(job_applications::class,'user_id','id');
+        return $this->hasMany(JobApplications::class,'user_id','id');
+    }
+
+    public function comments(){
+        return $this->hasMany('comments');
     }
 
 

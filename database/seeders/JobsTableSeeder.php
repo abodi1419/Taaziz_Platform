@@ -16,7 +16,7 @@ class JobsTableSeeder extends Seeder
     {
 
         Job::create([
-            'user_id'=>'1',
+            'user_id'=>'2',
             'company_name'=>'Hireejobsgulf',
             'company_phone'=>'0545454545',
             'company_website'=>'http://www.hireejobsgulf.com/',
@@ -28,7 +28,7 @@ class JobsTableSeeder extends Seeder
         ]);
 
         Job::create([
-            'user_id'=>'1',
+            'user_id'=>'2',
             'company_name'=>'T2',
             'company_phone'=>'0545454545',
             'company_website'=>'https://t2.sa/ar',
@@ -44,7 +44,7 @@ class JobsTableSeeder extends Seeder
                             Experience with source control management systems, including Subversion and Git.',
         ]);
         Job::create([
-            'user_id'=>'1',
+            'user_id'=>'2',
             'company_name'=>'T2',
             'company_phone'=>'0545454545',
             'company_website'=>'https://t2.sa/ar',
@@ -63,7 +63,7 @@ class JobsTableSeeder extends Seeder
                             - مهارات اتصال قوية مع القدرة على تطوير استراتيجية المنتج بناءً على البحث والاتجاه الجديد في هذا المجال.',
         ]);
         Job::create([
-            'user_id'=>'1',
+            'user_id'=>'2',
             'company_name'=>'T2',
             'company_phone'=>'0545454545',
             'company_website'=>'https://t2.sa/ar',

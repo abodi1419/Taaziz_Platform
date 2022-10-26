@@ -19,23 +19,24 @@ class RoleTableSeeder extends Seeder
         $permissions = Permission::pluck('id', 'id')->all();
         $role->syncPermissions($permissions);
 
-        $role = Role::create(['name' => 'writer']);
-        $role->givePermissionTo("Article create");
-        $role->givePermissionTo("Article list");
-        $role->givePermissionTo("Article edit");
-        $role->givePermissionTo("Article delete");
-
         $role = Role::create(['name' => 'student']);
         $role->givePermissionTo("Article create");
         $role->givePermissionTo("Article list");
-        $role->givePermissionTo("Article edit");
-        $role->givePermissionTo("Article delete");
+        $role->givePermissionTo("Job list");
+        $role->givePermissionTo("Job_application create");
+
+
+        $role = Role::create(['name' => 'employer']);
+        $role->givePermissionTo("Job create");
+        $role->givePermissionTo("Job_application list");
+        $role->givePermissionTo("Profile view");
+
+
 
 //        $role->givePermissionTo("Student create");
 //        $role->givePermissionTo("Student list");
 //        $role->givePermissionTo("Student edit");
 //        $role->givePermissionTo("Student delete");
 
-        $role->givePermissionTo("Job list");
     }
 }

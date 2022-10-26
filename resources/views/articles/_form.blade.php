@@ -14,7 +14,7 @@
 </div>
 <br>
 <div class="form-group">
-    <p>Tags</p>
+    <p>{{__('Tags')}}</p>
     @foreach($categories as $key => $title)
 
         <label for="category_{{$key}}">{{$title}}</label>

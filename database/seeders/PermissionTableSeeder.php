@@ -40,11 +40,27 @@ class PermissionTableSeeder extends Seeder
             'Student create',
             'Student edit',
             'Student delete',
+            //employers
+            'Employer list',
+            'Employer create',
+            'Employer edit',
+            'Employer delete',
             //jobs
             'Job create',
             'Job list',
             'Job edit',
             'Job delete',
+            // job applications
+            'Job_application create',
+            'Job_application list',
+            'Job_application edit',
+            'Job_application delete',
+            // profiles
+            'Profile create',
+            'Profile delete',
+            'Profile edit',
+            'Profile list',
+            'Profile view',
 
         ];
 

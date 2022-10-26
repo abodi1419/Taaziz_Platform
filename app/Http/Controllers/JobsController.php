@@ -22,8 +22,18 @@ class JobsController extends Controller
      */
     public function index()
     {
-        $jobs = Job::orderBy('id','DESC')->get();
-        return view("jobs.index",compact('jobs'));
+        $user_applications = null;
+        if(Auth::user()->hasRole('employer')){
+            $jobs = Auth::user()->jobs()->orderBy('updated_at','DESC')->get();
+
+        }else{
+            $jobs = Job::orderBy('id','DESC')->get();
+        }
+        if(Auth::user()->hasRole('student')){
+            $user_applications = Auth::user()->applications;
+        }
+        return view("jobs.index",compact('jobs','user_applications'));
+
 
     }
 

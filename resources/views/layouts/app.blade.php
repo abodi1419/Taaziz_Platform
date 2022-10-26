@@ -64,6 +64,9 @@
 
                     <h2 class="d-inline"><img src="{{url('logo1.png')}}" alt=""></h2>
                 </a>
+                <a class="navbar-brand" href="#">
+                    <img src="https://www.kau.edu.sa/img/logo_kau.png" alt="" height="30" />
+                </a>
 
                 <ul class="navbar-nav flex-grow-1 flex-md-grow-0 px-2">
                     @if(\Illuminate\Support\Facades\App::getLocale()=='en')
@@ -168,9 +171,9 @@
                                         @can('Job create')
                                             <a class="dropdown-item" href="{{route('jobs.create')}}">{{__("New job")}}</a>
                                         @endcan
-                                        @can('Job list')
+
                                             <a class="dropdown-item" href="{{route('jobs.index')}}">{{__("Show jobs")}}</a>
-                                        @endcan
+
                                         @if(auth()->user()->hasRole('student'))
                                             <a class="dropdown-item" href="{{route('myApplications')}}">{{__("my Applications")}}</a>
                                         @endif
@@ -232,7 +235,7 @@
 
                                 @if (Route::has('register'))
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register as a student') }}</a>
                                     </li>
                                 @endif
                                     @if (Route::has('register'))

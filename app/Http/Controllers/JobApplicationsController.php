@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\JobApplications;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,49 +15,61 @@ class JobApplicationsController extends Controller
     }
 
     public function store(Request $request, Job $job) {
+//        $data = $request->all();
+//        dd($data);
 
-//        if (Auth::user()) {
+        $validatedData =$request->validate([
+            'job_id'=>['numeric','exists:jobs,id']
+        ]);
 
-//            $request['job_id'] = $job->id;
-            $request['job_id'] = 1;
-            $request['user_id'] = Auth::id();
-            $request['status'] = 2;
+
+        $validatedData['user_id'] = Auth::id();
 //
-//            $user = Auth::user();
-//            $user->applications()->create($request->all());
-////
-//            return redirect()->back();
-
-            $data = $request->all();
-            dd($data);
-
-//        } else {
+            $user = Auth::user();
+            $user->applications()->create($validatedData);
 //
-//            return redirect()->back();
-//
-//        }
+            return redirect()->back();
+
 
 
     }
 
-//    public function show()
-//    {
-//        //
-//    }
 
-    public function viewApplicants(Job $job)
+    public function showApplicants(Job $job)
     {
-        return view('job_applications.viewApplicants', compact('job'));
+
+        $job = $job->load(['applications','applications.user.student','applications.user.student.profile']);
+        return view('job_applications.view_applicants', compact('job'));
     }
 
-    public function Candidates(Job $job)
+    public function showCandidates(Job $job)
     {
-        return view('job_applications.Candidates', compact('job'));
+
+        return view('job_applications.view_candidates', compact('job'));
+    }
+    public function candidacy(JobApplications $jobApplication)
+    {
+        $jobApplication->status = 3;
+        $jobApplication->save();
+        return redirect()->back()->with('success','Candidate');
     }
 
-    public function Accepted(Job $job)
+    public function reject(JobApplications $jobApplication)
     {
-        return view('job_applications.Accepted', compact('job'));
+        $jobApplication->status = 1;
+        $jobApplication->save();
+        return redirect()->back()->with('success','Rejected');
+    }
+    public function accept(JobApplications $jobApplication)
+    {
+        $jobApplication->status = 4;
+        $jobApplication->save();
+        return redirect()->back()->with('success','Accepted');
+    }
+
+    public function showAccepted(Job $job)
+    {
+        return view('job_applications.view_accepted', compact('job'));
     }
 
 }

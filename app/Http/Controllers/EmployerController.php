@@ -48,16 +48,13 @@ class EmployerController extends Controller
         ]);
 
         $validatedData['password'] = bcrypt($validatedData['password']);
+        $validatedData['active']=0;
         $user = User::create($validatedData);
-        $user->Employer()->create($validatedData);
-        $user->syncRoles('employer-waiting list');
-        if(auth()->attempt(array('email' => $validatedData['email'], 'password' => $request->password))){
-            return redirect()->to('/');
-        }else{
+        $user->assignRole('employer');
+        $user->employer()->create($validatedData);
 
-            return redirect()->route('login')->with('error','Email-Address And Password Are Wrong.');
+        return redirect()->route('login')->with(['success'=>__('Account created successfully')]);
 
-        }
     }
 
     /**

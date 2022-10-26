@@ -16,6 +16,9 @@ class CreateArticleCategories extends Migration
         Schema::create('article_categories', function (Blueprint $table) {
             $table->unsignedBigInteger('article_id');
             $table->unsignedBigInteger('category_id');
+
+
+
             $table->foreign('article_id')
                 ->references('id')
                 ->on('articles')

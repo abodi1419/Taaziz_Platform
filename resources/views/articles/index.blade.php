@@ -3,11 +3,11 @@
 @section('content')
     <div class="container">
         <div class="container">
-            <form action="/search/articles" method="get" role="search">
-                {{ csrf_field() }}
+            <form action="{{asset('/search/articles')}}" method="get" role="search">
                 <div class="input-group">
                     <input type="text" class="form-control" name="q"
-                           placeholder="Search articles" @isset($q) value="{{$q}}" @endisset> <span class="input-group-btn">
+                           placeholder="{{__('Search')}}" @isset($q) value="{{$q}}" @endisset>
+                    <span class="input-group-btn">
                     <button type="submit" class="btn btn-default">
                         <span class="fa fa-search"></span>
                     </button>
@@ -20,7 +20,7 @@
         <br><br>
         <hr>
         <h3 class="text-primary text-center">{{__('All Articles | Discussions | Events')}}</h3> <br>
-    <div class="row">
+     <div class="row">
 
         @forelse($articles as $article)
 
@@ -51,21 +51,12 @@
                     <hr>
 {{--                    like count in articles section--}}
                     @php
-                        $like_count = 0;
                         $comment_count = 0;
                     @endphp
 
-                    @foreach($article->likes as $like)
-                        @php
-                            if($like->like == 1){
-                                $like_count++;
-                            }
-                        @endphp
-
-                    @endforeach
                     @foreach($article->comments as $comment)
                         @php
-                            if($comment->id >=1){
+                            if(true){
                                  $comment_count++;
                             }
                         @endphp
@@ -74,7 +65,7 @@
                     <div class="container text-center">
                         <div class="row">
                             <div class="col">
-                                <span> {{$like_count}}</span>
+                                <span> {{count($article->likes)}}</span>
                                 <i class="fa fa-heart"></i>
                             </div>
                             <div class="col">

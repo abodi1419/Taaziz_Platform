@@ -31,6 +31,11 @@
                         <div class="row">
                             <div class="col"><a href="{{route("users.show",$user)}}">{{__('View user')}}</a></div>
                             <div class="col"><a href="{{route("users.edit",$user)}}">{{__('Edit user')}}</a></div>
+                            @if($user->active==0)
+                            <div class="col"><a class="btn btn-success" href="{{asset("users/activate/".$user->id)}}">{{__('Activate user')}}</a></div>
+                            @else
+                            <div class="col"><a class="btn btn-danger" href="{{asset("users/deactivate/".$user->id)}}">{{__('Deactivate user')}}</a></div>
+                            @endif
                             <form id="deleteForm" action="{{route("users.destroy",$user)}}" method="post">
                                 @csrf
                                 @method("DELETE")

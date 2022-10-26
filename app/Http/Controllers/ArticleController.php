@@ -16,7 +16,7 @@ class ArticleController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
+        $this->middleware('auth');
     }
 
     /**
@@ -57,9 +57,10 @@ class ArticleController extends Controller
             'content' => 'min:140|required',
             'categories' => 'required'
         ]);
+        $imgs =[];
         if(str_contains($content,'img')){
             $exploded = explode("src=",$content);
-            $imgs =[];
+
             for ($i=1; $i<count($exploded); $i++){
                 $secondExplode = explode('">',$exploded[$i])[0];
                 $secondExplode = substr($secondExplode,1);
@@ -72,17 +73,19 @@ class ArticleController extends Controller
         }
 
 //        dd($imgs);
-        foreach ($imgs as $img) {
-            $fileName = Str::random(12) . '.' . $img[1];
-            $upload = ['file_name' => $fileName];
-            Storage::disk('local')->putFileAs(
-                'public/uploads/posts/images',
-                $img[0],
-                $fileName
-            );
-            $imageURL = asset('storage/uploads/posts/images/' . $fileName);
-            $content = str_replace($img[0],$imageURL,$content);
+        if(isset($imgs)) {
+            foreach ($imgs as $img) {
+                $fileName = Str::random(12) . '.' . $img[1];
+                $upload = ['file_name' => $fileName];
+                Storage::disk('local')->putFileAs(
+                    'public/uploads/posts/images',
+                    $img[0],
+                    $fileName
+                );
+                $imageURL = asset('storage/uploads/posts/images/' . $fileName);
+                $content = str_replace($img[0], $imageURL, $content);
 
+            }
         }
         $request['content'] = $content;
 
