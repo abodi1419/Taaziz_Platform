@@ -64,6 +64,7 @@ class JobApplicationsController extends Controller
     {
         $jobApplication->status = 4;
         $jobApplication->save();
+        $jobApplication->user->student()->update(['is_employed'=>'1']);
         return redirect()->back()->with('success','Accepted');
     }
 

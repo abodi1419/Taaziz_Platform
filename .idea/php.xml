@@ -51,9 +51,6 @@
       <path value="$PROJECT_DIR$/vendor/voku/portable-ascii" />
       <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
       <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
       <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
       <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
@@ -108,7 +105,6 @@
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/vendor/facade/flare-client-php" />
       <path value="$PROJECT_DIR$/vendor/facade/ignition-contracts" />
-      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/dflydev/dot-access-data" />
       <path value="$PROJECT_DIR$/vendor/psy/psysh" />
@@ -117,6 +113,7 @@
       <path value="$PROJECT_DIR$/vendor/laravel/telescope" />
       <path value="$PROJECT_DIR$/vendor/larswiegers/laravel-translations-checker" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-searchable" />
+      <path value="$PROJECT_DIR$/vendor/joshrainwater/active-users" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
