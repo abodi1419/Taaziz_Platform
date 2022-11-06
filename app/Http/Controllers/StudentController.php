@@ -54,6 +54,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255',new KAUEmailValidation(), 'unique:users'],

@@ -110,7 +110,6 @@
       <path value="$PROJECT_DIR$/vendor/psy/psysh" />
       <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-permission" />
-      <path value="$PROJECT_DIR$/vendor/laravel/telescope" />
       <path value="$PROJECT_DIR$/vendor/larswiegers/laravel-translations-checker" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-searchable" />
       <path value="$PROJECT_DIR$/vendor/joshrainwater/active-users" />
