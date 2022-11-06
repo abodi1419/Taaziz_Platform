@@ -11,13 +11,42 @@
             border-radius: 20px;
             display: inline-block;
             position: absolute; top: 50%; right: 0;
+            margin: 5px;
         }
         h1{
             font-weight: bold;
 
         }
     </style>
+
 <div class="container">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+{{--            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>--}}
+{{--            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>--}}
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="https://pbs.twimg.com/profile_banners/986993325776560128/1603208371/1500x500" alt="First slide">
+            </div>
+{{--            <div class="carousel-item">--}}
+{{--                <img class="d-block w-100" src="..." alt="Second slide">--}}
+{{--            </div>--}}
+{{--            <div class="carousel-item">--}}
+{{--                <img class="d-block w-100" src="..." alt="Third slide">--}}
+{{--            </div>--}}
+        </div>
+        <a class="carousel-control-prev" href="#" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
     @if(isset($students_count))
     <div class="text-center">
         <div class="row">
@@ -29,7 +58,7 @@
                 </h3>
                 <div class="text-center text-success">
                     <h1 style="position: absolute; top: 50%; left: 0; right: 0;">
-                        {{$active_users}}
+{{--                        {{$active_users}}--}}
                     </h1>
                 </div>
             </div>
@@ -190,32 +219,7 @@
 {{--                </div>--}}
 {{--            </div>--}}
 {{--            <img src="https://pbs.twimg.com/profile_banners/986993325776560128/1603208371/1500x500" text-center width="500"  alt="">--}}
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="https://pbs.twimg.com/profile_banners/986993325776560128/1603208371/1500x500" alt="First slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="..." alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="..." alt="Third slide">
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
+
         </div>
     </div>
 </div>

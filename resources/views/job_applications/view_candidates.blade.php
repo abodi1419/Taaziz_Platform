@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        .bold{
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .box{
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
     <div class="container">
         <h3 class="text-primary text-center">{{__('View Applications')}}: {{$job->title}} </h3> <br>
 
@@ -21,19 +31,15 @@
                                 {{--                                {{$profile->sutdent_id->gpa}}--}}
                                 <p> {{__('Graduation date')}}: {{$application->user->student->graduation_date}}</p>
 
-                                <a href="{{asset('profile/'.$application->user->student->profile->id)}}"> {{__('view profile')}} </a>
+                                <a class="box" href="{{asset('profile/'.$application->user->student->profile->id)}}"> {{__('view profile')}} </a>
                             </div>
 
-                            <div class="card-footer d-flex justify-content-center align-items-center bg-success">
-                                {{--                                <form action="" method="post">--}}
-                                {{--                                    {{route('applications.store',$job->id)}}--}}
-                                {{--                                    @csrf--}}
-                                <a class="btn bg-success border-0 w-100" href="{{asset('accept/'.$application->id)}}">{{__('Accept')}}</a>
-                                {{--                                    <button class="bg-warning border-0">{{__('candidacy')}}</button>--}}
-                                {{--                                </form>--}}
+                            <div class="card-footer d-flex justify-content-center align-items-center w3-green">
+                                <a class="btn w3-green border-0 w-100 bold" href="{{asset('accept/'.$application->id)}}">{{__('Accept')}}</a>
                             </div>
-                            <div class="card-footer d-flex justify-content-center align-items-center bg-danger">
-                                <a class="btn bg-danger border-0 w-100" href="{{asset('reject/'.$application->id)}}">{{__('Reject')}}</a>
+
+                            <div class="card-footer d-flex justify-content-center align-items-center w3-red">
+                                <a class="btn w3-red border-0 w-100 bold" href="{{asset('reject/'.$application->id)}}">{{__('Reject')}}</a>
 
                             </div>
                         </div>

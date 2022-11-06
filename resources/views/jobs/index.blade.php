@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        .unline{
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .space{
+            margin-left: 10px;
+            border-radius: 10px;
+        }
+    </style>
     <div class="container">
         @can('Job create')
             <a href="{{route('jobs.create')}}" class= "btn btn-lg btn-primary">{{__('Post a new job')}}</a>
@@ -18,7 +28,7 @@
                     <div class="card">
 
                         <div class="card-header  d-flex justify-content-center align-items-center">
-                            <h5> <a class="text-dark" href="{{route('jobs.show', $job->id)}}">{{$job->title}}</a></h5>
+                            <h5> <a class=" unline text-dark" href="{{route('jobs.show', $job->id)}}">{{$job->title}}</a></h5>
                         </div>
 
                         <div class="card-body">
@@ -72,19 +82,22 @@
                         {{--   It appears only to admin or employers --}}
                         @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('employer'))
                             <div class="card-footer d-flex justify-content-center align-items-center bg-light">
-                                    @csrf
-                                    <a class="bg-light text-black" href="{{asset('applicants/'.$job->id.'/show')}}">{{__('View Applicants')}}</a>
+                                <div class="space d-flex justify-content-center align-items-center w3-blue">
+{{--                                        @csrf--}}
+                                        <a class="unline w3-blue text-black m-3 w-100" href="{{asset('applicants/'.$job->id.'/show')}}">{{__('Applicants')}}</a>
+                                </div>
+
+                                <div class="space d-flex justify-content-center align-items-center w3-yellow">
+{{--                                        @csrf--}}
+                                    <a class="unline w3-yellow text-black m-3 w-100" href="{{asset('candidates/'.$job->id.'/show')}}">{{__('Candidates')}}</a>
+                                </div>
+
+                                <div class="space d-flex justify-content-center align-items-center w3-green">
+{{--                                        @csrf--}}
+                                    <a class="unline w3-green text-black m-3 w-100" href="{{asset('accepted/'.$job->id.'/show')}}">{{__('Accepted')}}</a>
+                                </div>
                             </div>
 
-                            <div class="card-footer d-flex justify-content-center align-items-center bg-warning">
-                                    @csrf
-                                <a class="bg-warning text-black" href="{{asset('candidates/'.$job->id.'/show')}}">{{__('Candidates')}}</a>
-                            </div>
-
-                            <div class="card-footer d-flex justify-content-center align-items-center bg-success">
-                                    @csrf
-                                <a class="bg-success text-white" href="{{asset('accepted/'.$job->id.'/show')}}">{{__('Accepted')}}</a>
-                            </div>
                         @endif
                     </div>
                 </div>
