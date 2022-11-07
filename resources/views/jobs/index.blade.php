@@ -84,17 +84,17 @@
                             <div class="card-footer d-flex justify-content-center align-items-center bg-light">
                                 <div class="space d-flex justify-content-center align-items-center w3-blue">
 {{--                                        @csrf--}}
-                                        <a class="unline w3-blue text-black m-3 w-100" href="{{asset('applicants/'.$job->id.'/show')}}">{{__('Applicants')}}</a>
+                                        <a class="unline w3-blue text-black m-2 p-1  w-100" href="{{asset('applicants/'.$job->id.'/show')}}">{{__('Applicants')}}</a>
                                 </div>
 
                                 <div class="space d-flex justify-content-center align-items-center w3-yellow">
 {{--                                        @csrf--}}
-                                    <a class="unline w3-yellow text-black m-3 w-100" href="{{asset('candidates/'.$job->id.'/show')}}">{{__('Candidates')}}</a>
+                                    <a class="unline w3-yellow text-black m-2 p-1  w-100" href="{{asset('candidates/'.$job->id.'/show')}}">{{__('Candidates')}}</a>
                                 </div>
 
                                 <div class="space d-flex justify-content-center align-items-center w3-green">
 {{--                                        @csrf--}}
-                                    <a class="unline w3-green text-black m-3 w-100" href="{{asset('accepted/'.$job->id.'/show')}}">{{__('Accepted')}}</a>
+                                    <a class="unline w3-green text-black m-2 p-1 w-100" href="{{asset('accepted/'.$job->id.'/show')}}">{{__('Accepted')}}</a>
                                 </div>
                             </div>
 

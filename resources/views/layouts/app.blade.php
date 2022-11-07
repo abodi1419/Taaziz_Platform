@@ -274,6 +274,7 @@
         </main>
     </div>
 
+    @auth()
         <!-- Footer -->
         <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">
             <!-- Section: Social media -->
@@ -382,6 +383,6 @@
             <!-- Copyright -->
         </footer>
         <!-- Footer -->
-
+    @endauth
 </body>
 </html>

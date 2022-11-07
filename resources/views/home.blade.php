@@ -56,18 +56,18 @@
         <h3 class="bold">| {{__("Statistics panel")}} |</h3>
         <br>
         <div class="row">
-            <div class="col-12 square-info shadow-sm position-relative p-3 mb-1 rounded">
+{{--            <div class="col-12 square-info shadow-sm position-relative p-3 mb-1 rounded">--}}
 
-                <h3 class="">
-                    <span class="small-square bg-success"></span>
-                    {{__("Active sessions")}}
-                </h3>
-                <div class="text-center text-success">
-                    <h1 style="position: absolute; top: 50%; left: 0; right: 0;">
-                        {{$active_users}}
-                    </h1>
-                </div>
-            </div>
+{{--                <h3 class="">--}}
+{{--                    <span class="small-square bg-success"></span>--}}
+{{--                    {{__("Active sessions")}}--}}
+{{--                </h3>--}}
+{{--                <div class="text-center text-success">--}}
+{{--                    <h1 style="position: absolute; top: 50%; left: 0; right: 0;">--}}
+{{--                        {{$active_users}}--}}
+{{--                    </h1>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
             <div class="col-6 square-info mb-1 position-relative shadow-sm p-3 rounded">
                 <h3>
