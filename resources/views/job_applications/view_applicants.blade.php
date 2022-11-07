@@ -25,41 +25,41 @@
 
         <h3 class="text-primary text-center">{{__('View Applications')}}: {{$job->title}} </h3> <br>
         <hr>
-        <button class="btn btn-outline-dark bold" onclick="myFunction()">Filter
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
-                <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
-            </svg>
-        </button>
+{{--        <button class="btn btn-outline-dark bold" onclick="myFunction()">Filter--}}
+{{--            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">--}}
+{{--                <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>--}}
+{{--            </svg>--}}
+{{--        </button>--}}
         <div class="container">
-            <form action="{{asset('/search/applicants/')}}" method="post" role="search" id="myDIV" style="display: none">
-                @csrf
-                <div class="row justify-content-md-center">
-                <div class="col-3">
-                    <label>Sort by:</label>
-                    <select name="type">
-                        <option value="GPA">GPA</option>
-                        <option value="Graduation-date">Graduation date</option>
-                    </select>
-                </div>
-                <div class="col-3">
-                    <label>Type of sort:</label>
-                    <select name="sort">
-                        <option value="Descending">Descending</option>
-                        <option value="Ascending">Ascending</option>
-                    </select>
-                </div>
+{{--            <form action="{{asset('/search/applicants/')}}" method="post" role="search" id="myDIV" style="display: none">--}}
+{{--                @csrf--}}
+{{--                <div class="row justify-content-md-center">--}}
+{{--                <div class="col-3">--}}
+{{--                    <label>Sort by:</label>--}}
+{{--                    <select name="type">--}}
+{{--                        <option value="GPA">GPA</option>--}}
+{{--                        <option value="Graduation-date">Graduation date</option>--}}
+{{--                    </select>--}}
+{{--                </div>--}}
+{{--                <div class="col-3">--}}
+{{--                    <label>Type of sort:</label>--}}
+{{--                    <select name="sort">--}}
+{{--                        <option value="Descending">Descending</option>--}}
+{{--                        <option value="Ascending">Ascending</option>--}}
+{{--                    </select>--}}
+{{--                </div>--}}
 
-                <div class="col-1">
-                    <span class="input-group-btn">
-                    <button type="submit" style="border: none; border-radius: 5px">
-                        <a class="fa fa-search box"> Filter </a>
-                    </button>
-                </span>
-                </div>
+{{--                <div class="col-1">--}}
+{{--                    <span class="input-group-btn">--}}
+{{--                    <button type="submit" style="border: none; border-radius: 5px">--}}
+{{--                        <a class="fa fa-search box"> Filter </a>--}}
+{{--                    </button>--}}
+{{--                </span>--}}
+{{--                </div>--}}
 
-            </div>
-            </form>
-        <br>
+{{--            </div>--}}
+{{--            </form>--}}
+{{--        <br>--}}
 
         <div class="row">
 {{--            @dd($job->applications)--}}

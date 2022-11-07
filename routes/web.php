@@ -153,10 +153,10 @@ Route::get( '/search/articles', function (Request $request) {
     return redirect()->to('articles');
 });
 
-Route::post( '/search/applicants', function (Request $request) {
-    dd($request->all());
-    $applicants_gpa_des = \App\Models\JobApplications::orderBy('gpa','desc')->paginate(15);
-    $applicants_gpa_ase = \App\Models\JobApplications::orderBy('gpa','desc')->paginate(15);
+//Route::post( '/search/applicants', function (Request $request) {
+//    dd($request->all());
+//    $applicants_gpa_des = \App\Models\JobApplications::orderBy('gpa','desc')->paginate(15);
+//    $applicants_gpa_ase = \App\Models\JobApplications::orderBy('gpa','desc')->paginate(15);
 
 //    if($q != ""){
 //        $applicants = \App\Models\Profile::orderBy('gpa','desc')->paginate(15);
@@ -168,7 +168,9 @@ Route::post( '/search/applicants', function (Request $request) {
 //        return view ( 'job_applications/view_applicants',compact('applicants','q') )->withMessage ( 'No Details found. Try to search again !' );
 //    }
 //    return redirect()->back();
-});
+//});
+
+Route::get('/team', [App\Http\Controllers\TeamController::class, 'index'])->name('team');
 
 
 
