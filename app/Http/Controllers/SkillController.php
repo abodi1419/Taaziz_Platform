@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SkillController extends Controller
 {
@@ -109,6 +110,9 @@ class SkillController extends Controller
      */
     public function destroy(Skill $skill)
     {
+        if($skill->profile->student->user_id!=Auth::user()->id){
+            abort(403,"Not authorized");
+        }
         $skill->delete();
         return redirect()->back();
     }

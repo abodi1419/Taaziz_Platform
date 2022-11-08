@@ -39,12 +39,12 @@ class HomeController extends Controller
         $candidate_apps_count = DB::table('job_applications')->where('status','=','3')->count();
         $applied_apps_count = DB::table('job_applications')->where('status','=','2')->count();
         $rejected_apps_count = DB::table('job_applications')->where('status','=','1')->count();
-//        $active_users = Active::users()->count();
+        $active_users = Active::users()->count();
         if(Auth::user()->hasRole("admin")){
             return view('home',compact('students_count','employed_students'
             ,'employers_count','jobs_count','apps_count','profiles_count'
             ,'accepted_apps_count','candidate_apps_count','applied_apps_count','rejected_apps_count'
-            ,'articles_count','comments_count','likes_count'));
+            ,'articles_count','comments_count','likes_count','active_users'));
         }else{
             return view('home');
 

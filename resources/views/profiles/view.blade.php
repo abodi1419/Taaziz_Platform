@@ -39,13 +39,13 @@
             @foreach($skills as $skill)
                 <div class="row">
                     <li class="col">{{$skill->skill}}</li>
-                    <div class="col">
-                        <form action="{{route('skills.destroy', $skill)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn bg-transparent text-danger"><i class="fa fa-trash"></i></button>
-                        </form>
-                    </div>
+{{--                    <div class="col">--}}
+{{--                        <form action="{{route('skills.destroy', $skill)}}" method="post">--}}
+{{--                            @csrf--}}
+{{--                            @method('DELETE')--}}
+{{--                            <button class="btn bg-transparent text-danger"><i class="fa fa-trash"></i></button>--}}
+{{--                        </form>--}}
+{{--                    </div>--}}
                 </div>
             @endforeach
         </ul>
@@ -53,11 +53,11 @@
     @else
         <p>No skills added</p>
     @endif
-{{--    <div class="row">--}}
-{{--        <h4 class="col">{{__('Experiences')}}</h4>--}}
+    <div class="row">
+        <h4 class="col">{{__('Experiences')}}</h4>
 {{--        <a class="col" href="{{route('experiences.create')}}">{{__('Add')}}</a>--}}
 
-{{--    </div>--}}
+    </div>
     <hr>
     @if(count($experiences=$profile->experiences))
     <ul>
